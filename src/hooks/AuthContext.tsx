@@ -9,7 +9,7 @@ import {
 import type { User } from "firebase/auth";
 
 import { subscribeToAuth } from "../firebase/auth";
-import { getUserProfile } from "../services/userService";
+import { createUserProfile, getUserProfile } from "../services/userService";
 
 import type { UserProfile } from "../types";
 
@@ -43,15 +43,28 @@ export const AuthProvider = ({
   useEffect(() => {
     const unsubscribe = subscribeToAuth(
       async (firebaseUser) => {
+        setLoading(true);
         setUser(firebaseUser);
 
         if (firebaseUser) {
-          const userProfile =
-            await getUserProfile(
-              firebaseUser.uid
-            );
+          try {
+            let userProfile = await getUserProfile(firebaseUser.uid);
 
-          setProfile(userProfile);
+            // Accounts created before Firestore profiles were introduced still
+            // receive a safe, non-admin profile at their next sign-in.
+            if (!userProfile) {
+              await createUserProfile(firebaseUser.uid, {
+                name: firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "Student",
+                email: firebaseUser.email || "",
+              });
+              userProfile = await getUserProfile(firebaseUser.uid);
+            }
+
+            setProfile(userProfile);
+          } catch (error) {
+            console.error("Unable to load the signed-in user profile:", error);
+            setProfile(null);
+          }
         } else {
           setProfile(null);
         }

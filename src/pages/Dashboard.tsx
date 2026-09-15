@@ -225,7 +225,14 @@ const Dashboard = () => {
         {/* Header */}
         <section className="border-b border-gray-200 bg-white">
           <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
-            <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+            <div className="flex flex-wrap gap-3 text-sm">
+              <Link to="/my-colleges" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">My colleges</Link>
+              <Link to="/my-choice-list" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Choice lists</Link>
+              <Link to="/my-comparisons" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Comparisons</Link>
+              <Link to="/counselling-request" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Counselling</Link>
+              <Link to="/profile" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Profile</Link>
+            </div>
+            <div className="mt-8 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
                   <Sparkles className="h-4 w-4" />

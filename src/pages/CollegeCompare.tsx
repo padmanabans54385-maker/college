@@ -12,8 +12,6 @@ import {
   X,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 import { useEffect, useState } from "react";
 import { getCollegeById } from "../services/collegeService";
@@ -47,7 +45,7 @@ const CollegeCompare = () => {
         const results =
           await Promise.all(
             ids
-              .slice(0, 3)
+              .slice(0, 4)
               .map((id) =>
                 getCollegeById(id)
               )
@@ -77,22 +75,14 @@ const CollegeCompare = () => {
 
   if (loading) {
     return (
-      <>
-        <Navbar />
-
-        <div className="flex min-h-[70vh] items-center justify-center">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-black" />
-        </div>
-
-        <Footer />
-      </>
+      <div className="flex min-h-[70vh] items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-teal-700" />
+      </div>
     );
   }
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen bg-gray-50">
         <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
           <Link
@@ -109,8 +99,8 @@ const CollegeCompare = () => {
             </h1>
 
             <p className="mt-2 text-gray-500">
-              Compare up to three colleges
-              side by side.
+              Compare up to four colleges
+              side by side. Verify details with each institution.
             </p>
           </div>
 
@@ -281,9 +271,48 @@ const CollegeCompare = () => {
                           Visit Website
                         </a>
                       ) : (
-                        "—"
+                        "Information currently unavailable."
                       )
                     }
+                  />
+                  <CompareRow
+                    label="University"
+                    colleges={colleges}
+                    render={(college) => college.university || "Information currently unavailable."}
+                  />
+                  <CompareRow
+                    label="College type"
+                    colleges={colleges}
+                    render={(college) => college.collegeType || "Information currently unavailable."}
+                  />
+                  <CompareRow
+                    label="TNEA code"
+                    colleges={colleges}
+                    render={(college) => college.tneaCode || "Information currently unavailable."}
+                  />
+                  <CompareRow
+                    label="Tuition fees"
+                    colleges={colleges}
+                    render={(college) => college.fees?.tuition || college.feeRange || "Information currently unavailable."}
+                  />
+                  <CompareRow
+                    label="Hostel fees"
+                    colleges={colleges}
+                    render={(college) => college.fees?.hostel || college.hostel?.fees || "Information currently unavailable."}
+                  />
+                  <CompareRow
+                    label="Placement"
+                    colleges={colleges}
+                    render={(college) =>
+                      college.placements?.averagePackage ||
+                      college.placements?.rate ||
+                      "Information currently unavailable."
+                    }
+                  />
+                  <CompareRow
+                    label="Accreditation"
+                    colleges={colleges}
+                    render={(college) => college.accreditation || college.naacGrade || "Information currently unavailable."}
                   />
 
                   <CompareRow
@@ -314,7 +343,6 @@ const CollegeCompare = () => {
         </div>
       </main>
 
-      <Footer />
     </>
   );
 };

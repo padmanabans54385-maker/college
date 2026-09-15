@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useState,
   type FormEvent,
 } from "react";
@@ -13,10 +14,13 @@ import {
   Mail,
 } from "lucide-react";
 
-import { loginUser } from "../firebase/auth";
+import { loginUser, loginWithGoogle, isGoogleAuthEnabled } from "../firebase/auth";
+import { brand } from "../config/brand";
+import { useAuth } from "../hooks/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { user, profile, loading: authLoading } = useAuth();
 
   const [email, setEmail] =
     useState("");
@@ -33,6 +37,19 @@ const Login = () => {
   const [error, setError] =
     useState("");
 
+  useEffect(() => {
+    if (authLoading || !user || !profile) return;
+
+    const destination =
+      profile.role === "admin"
+        ? "/admin"
+        : profile.role === "college"
+          ? "/college"
+          : "/dashboard/student";
+
+    navigate(destination, { replace: true });
+  }, [authLoading, navigate, profile, user]);
+
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
   ) => {
@@ -42,12 +59,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await loginUser(
-        email,
-        password
-      );
-
-      navigate("/dashboard");
+      await loginUser(email, password);
     } catch (error: unknown) {
       console.error(error);
 
@@ -76,6 +88,18 @@ const Login = () => {
     }
   };
 
+  const handleGoogle = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      await loginWithGoogle();
+    } catch {
+      setError("Google sign-in is not available.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
 
@@ -89,14 +113,8 @@ const Login = () => {
       >
 
         <div>
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-xl font-bold"
-          >
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 text-sm font-black backdrop-blur-sm">
-              C
-            </div>
-            CollegeCrop
+          <Link to="/" className="inline-block">
+            <img src={brand.logoSrc} alt={brand.name} className="h-16 w-auto rounded-xl bg-white p-2" />
           </Link>
         </div>
 
@@ -121,8 +139,8 @@ const Login = () => {
 
         </div>
 
-        <p className="text-xs text-indigo-400">
-          © 2026 CollegeCrop
+          <p className="text-xs text-indigo-400">
+          © {brand.year} {brand.name}
         </p>
 
       </div>
@@ -274,6 +292,21 @@ const Login = () => {
                 />
               )}
             </button>
+
+            <Link to="/forgot-password" className="block text-center text-sm font-semibold text-teal-700">
+              Forgot password?
+            </Link>
+
+            {isGoogleAuthEnabled && (
+              <button
+                type="button"
+                onClick={handleGoogle}
+                disabled={loading}
+                className="w-full rounded-xl border py-3 text-sm font-semibold"
+              >
+                Continue with Google
+              </button>
+            )}
 
           </form>
 

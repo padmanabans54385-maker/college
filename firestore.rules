@@ -1,0 +1,110 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return signedIn() && userDoc().role == "admin";
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId)
+        && request.resource.data.role == "student";
+      allow update: if (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(["role"]))
+        || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    match /colleges/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /courses/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /courseCategories/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /scholarships/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /onlineCourses/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /cutoffs/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /admission_updates/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /blogs/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /faqs/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /testimonials/{id} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /settings/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /enquiries/{id} {
+      allow create: if true;
+      allow read, update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+    match /leads/{id} {
+      allow create: if true;
+      allow read, update: if isAdmin();
+    }
+    match /counselling_requests/{id} {
+      allow create: if true;
+      allow read: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+      allow update: if isAdmin();
+    }
+    match /choice_lists/{id} {
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+    match /comparisons/{id} {
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow read: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+    match /savedColleges/{id} {
+      allow read, write: if signedIn() && (isAdmin() || resource.data.userId == request.auth.uid || request.resource.data.userId == request.auth.uid);
+    }
+    match /savedScholarships/{id} {
+      allow read, write: if signedIn() && (isAdmin() || resource.data.userId == request.auth.uid || request.resource.data.userId == request.auth.uid);
+    }
+    match /applications/{id} {
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow read, update: if isAdmin() || (signedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

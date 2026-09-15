@@ -116,6 +116,12 @@ const StudentProfile = () => {
 
   const [percentage, setPercentage] =
     useState("");
+  const [academicLevel, setAcademicLevel] = useState("");
+  const [tneaRank, setTneaRank] = useState("");
+  const [cutoff, setCutoff] = useState("");
+  const [community, setCommunity] = useState("");
+  const [preferredCourse, setPreferredCourse] = useState("");
+  const [budget, setBudget] = useState("");
 
   const [profileImage, setProfileImage] =
     useState("");
@@ -168,6 +174,12 @@ const StudentProfile = () => {
       setPercentage(
         profile.percentage ?? ""
       );
+      setAcademicLevel(profile.academicLevel ?? "");
+      setTneaRank(profile.tneaRank ?? "");
+      setCutoff(profile.cutoff ?? "");
+      setCommunity(profile.community ?? "");
+      setPreferredCourse(profile.preferredCourse ?? "");
+      setBudget(profile.budget ?? "");
 
       setProfileImage(
         profile.profileImage ?? ""
@@ -279,6 +291,12 @@ const StudentProfile = () => {
           board,
           passingYear,
           percentage,
+          academicLevel,
+          tneaRank,
+          cutoff,
+          community,
+          preferredCourse,
+          budget,
         }
       );
 
@@ -570,6 +588,12 @@ const StudentProfile = () => {
                   value={percentage}
                   onChange={setPercentage}
                 />
+                <Input label="Academic level" value={academicLevel} onChange={setAcademicLevel} />
+                <Input label="TNEA rank" value={tneaRank} onChange={setTneaRank} />
+                <Input label="Cutoff" value={cutoff} onChange={setCutoff} />
+                <Input label="Community" value={community} onChange={setCommunity} />
+                <Input label="Preferred course" value={preferredCourse} onChange={setPreferredCourse} />
+                <Input label="Budget" value={budget} onChange={setBudget} />
               </div>
             </section>
 

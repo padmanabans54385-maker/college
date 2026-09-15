@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCgx6WWDdWPkmXVi5OJiq-xl61KbXa-ToA",
-  authDomain: "collegecrop-235bc.firebaseapp.com",
-  projectId: "collegecrop-235bc",
-  storageBucket: "collegecrop-235bc.firebasestorage.app",
-  messagingSenderId: "667419423503",
-  appId: "1:667419423503:web:a6411d7e977407975f847a"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

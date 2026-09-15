@@ -79,7 +79,7 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
   };
 
   return (
-    <article className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+    <article className="surface-card card-interactive group overflow-hidden">
       <div className="relative h-52 overflow-hidden bg-gray-100">
         {college.logo ? (
           <img

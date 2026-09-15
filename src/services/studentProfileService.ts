@@ -26,6 +26,14 @@ export interface StudentProfileUpdate {
   board?: string;
   passingYear?: string;
   percentage?: string;
+
+  academicLevel?: string;
+  tneaRank?: string;
+  cutoff?: string;
+  community?: string;
+  preferredCourse?: string;
+  preferredLocations?: string[];
+  budget?: string;
 }
 
 export const updateStudentProfile = async (

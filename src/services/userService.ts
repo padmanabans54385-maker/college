@@ -1,6 +1,8 @@
 import {
+  collection,
   doc,
   getDoc,
+  getDocs,
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
@@ -52,4 +54,12 @@ export const getUserProfile = async (
     id: snapshot.id,
     ...snapshot.data(),
   } as UserProfile;
+};
+
+export const getAllUsers = async () => {
+  const snapshot = await getDocs(collection(db, "users"));
+  return snapshot.docs.map((item) => ({
+    id: item.id,
+    ...item.data(),
+  })) as UserProfile[];
 };

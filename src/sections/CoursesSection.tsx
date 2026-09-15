@@ -184,6 +184,35 @@ const CoursesSection = () => {
           })}
         </div>
 
+        <div className="mt-10 flex flex-wrap gap-2">
+          {[
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication Engineering",
+            "Electrical & Electronics Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Artificial Intelligence & Data Science",
+            "AI & ML",
+            "Biomedical Engineering",
+            "Biotechnology",
+            "MBA",
+            "MBBS",
+            "BDS",
+            "Nursing",
+            "Pharmacy",
+            "Allied Health Sciences",
+          ].map((course) => (
+            <Link
+              key={course}
+              to={`/courses?q=${encodeURIComponent(course)}`}
+              className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-teal-400"
+            >
+              {course}
+            </Link>
+          ))}
+        </div>
+
       </div>
     </section>
   );

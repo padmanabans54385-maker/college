@@ -22,8 +22,6 @@ import {
   X,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 import { useAuth } from "../hooks/AuthContext";
 
@@ -80,7 +78,9 @@ const Colleges = () => {
   const [filters, setFilters] =
     useState<CollegeFilters>({
       search:
-        searchParams.get("search") ?? "",
+        searchParams.get("search") ??
+        searchParams.get("q") ??
+        "",
       state:
         searchParams.get("state") ?? "",
       district:
@@ -89,6 +89,11 @@ const Colleges = () => {
         searchParams.get("course") ?? "",
       verifiedOnly:
         searchParams.get("verified") === "true",
+      collegeType: searchParams.get("type") ?? "",
+      autonomous: searchParams.get("autonomous") ?? "",
+      tnea: searchParams.get("tnea") ?? "",
+      hostel: searchParams.get("hostel") ?? "",
+      scholarship: searchParams.get("scholarship") ?? "",
       sort:
         (searchParams.get("sort") as CollegeFilters["sort"]) ??
         "name-asc",
@@ -222,6 +227,12 @@ const Colleges = () => {
       );
     }
 
+    if (next.collegeType) params.set("type", next.collegeType);
+    if (next.autonomous) params.set("autonomous", next.autonomous);
+    if (next.tnea) params.set("tnea", next.tnea);
+    if (next.hostel) params.set("hostel", next.hostel);
+    if (next.scholarship) params.set("scholarship", next.scholarship);
+
     if (next.sort !== "name-asc") {
       params.set(
         "sort",
@@ -239,6 +250,11 @@ const Colleges = () => {
       district: "",
       course: "",
       verifiedOnly: false,
+      collegeType: "",
+      autonomous: "",
+      tnea: "",
+      hostel: "",
+      scholarship: "",
       sort: "name-asc",
     };
 
@@ -340,7 +356,7 @@ const Colleges = () => {
         );
       }
 
-      if (current.length >= 3) {
+      if (current.length >= 4) {
         return current;
       }
 
@@ -382,8 +398,6 @@ const Colleges = () => {
 
   return (
     <>
-      <Navbar />
-
       <main className="min-h-screen bg-gray-50">
         {/* Hero */}
         <section className="relative overflow-hidden bg-slate-950 py-16 text-white lg:py-24">
@@ -408,7 +422,7 @@ const Colleges = () => {
             </div>
 
             {/* Search */}
-            <div className="mt-8 rounded-3xl border border-slate-800 bg-slate-900/90 p-3 shadow-2xl backdrop-blur-xl">
+            <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900/90 p-3 shadow-2xl backdrop-blur-xl">
               <div className="flex flex-col gap-2 md:flex-row">
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
@@ -461,7 +475,7 @@ const Colleges = () => {
             {/* Main */}
             <div className="min-w-0 flex-1">
               {/* Toolbar */}
-              <div className="mb-6 flex flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="surface-card mb-6 flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-gray-950">
                     {filteredColleges.length}{" "}
@@ -506,6 +520,9 @@ const Colleges = () => {
                     <option value="location">
                       Location
                     </option>
+                    <option value="relevance">Relevance</option>
+                    <option value="fees">Fees</option>
+                    <option value="placement">Placement</option>
                   </select>
                 </div>
               </div>
@@ -546,7 +563,7 @@ const Colleges = () => {
                           )}
                           canCompare={
                             compareIds.length <
-                              3 ||
+                              4 ||
                             compareIds.includes(
                               college.id
                             )
@@ -663,7 +680,6 @@ const Colleges = () => {
         />
       )}
 
-      <Footer />
     </>
   );
 };
@@ -684,7 +700,7 @@ const FilterPanel = ({
   courseOptions: string[];
 }) => {
   return (
-    <div className="rounded-3xl border border-gray-200 bg-white p-5">
+    <div className="surface-card p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Filter className="h-5 w-5" />
@@ -735,6 +751,37 @@ const FilterPanel = ({
               course: value,
             })
           }
+        />
+
+        <FilterSelect
+          label="College type"
+          value={filters.collegeType}
+          options={["Government", "Private", "Aided"]}
+          onChange={(value) => updateFilters({ collegeType: value })}
+        />
+        <FilterSelect
+          label="Autonomous"
+          value={filters.autonomous}
+          options={["yes", "no"]}
+          onChange={(value) => updateFilters({ autonomous: value })}
+        />
+        <FilterSelect
+          label="TNEA participating"
+          value={filters.tnea}
+          options={["yes"]}
+          onChange={(value) => updateFilters({ tnea: value })}
+        />
+        <FilterSelect
+          label="Hostel"
+          value={filters.hostel}
+          options={["yes"]}
+          onChange={(value) => updateFilters({ hostel: value })}
+        />
+        <FilterSelect
+          label="Scholarships"
+          value={filters.scholarship}
+          options={["yes"]}
+          onChange={(value) => updateFilters({ scholarship: value })}
         />
 
         <label className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 p-4">
@@ -832,7 +879,7 @@ const CollegeDiscoveryCard = ({
   onCompare: () => void;
 }) => {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-500/10 flex flex-col justify-between">
+    <article className="surface-card card-interactive shimmer-card group flex flex-col justify-between overflow-hidden">
       <div>
         <div className="relative h-48 overflow-hidden bg-slate-100">
           {college.logo ? (
@@ -912,14 +959,14 @@ const CollegeDiscoveryCard = ({
         <div className="grid grid-cols-2 gap-2">
           <Link
             to={`/colleges/${college.id}`}
-            className="rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-3 py-2.5 text-center text-xs font-semibold text-white shadow-md transition hover:opacity-95"
+            className="rounded-xl bg-teal-700 px-3 py-2.5 text-center text-xs font-semibold text-white shadow-md transition hover:bg-teal-800"
           >
             View Details
           </Link>
 
           <Link
             to={`/colleges/${college.id}/apply`}
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-center text-xs font-semibold text-slate-800 transition hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700"
+            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-center text-xs font-semibold text-slate-800 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-800"
           >
             Apply Now
           </Link>
@@ -961,7 +1008,7 @@ const CompareBar = ({
       <div className="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-sm font-bold text-gray-950">
-            Compare ({colleges.length}/3)
+            Compare ({colleges.length}/4)
           </span>
 
           {colleges.map((college) => (
@@ -996,20 +1043,14 @@ const CompareBar = ({
             Clear
           </button>
 
-          <button
-            type="button"
-            onClick={() =>
-              alert(
-                "College comparison screen will be added in the next step."
-              )
-            }
-            disabled={
-              colleges.length < 2
-            }
-            className="rounded-xl bg-black px-5 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:bg-gray-300"
+          <Link
+            to={`/compare?ids=${colleges.map((c) => c.id).join(",")}`}
+            className={`rounded-xl px-5 py-2.5 text-center text-sm font-semibold text-white ${
+              colleges.length < 2 ? "pointer-events-none bg-gray-300" : "bg-teal-700"
+            }`}
           >
             Compare Now
-          </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -1122,8 +1163,7 @@ const EmptyResults = ({
     </h2>
 
     <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-gray-500">
-      Try changing your search or removing
-      one of the filters.
+      No colleges match your current filters. Try expanding your location or course preferences.
     </p>
 
     <button

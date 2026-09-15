@@ -1,349 +1,208 @@
-import { useMemo } from "react";
-import {
-  Link,
-  useSearchParams,
-} from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
-  CheckCircle2,
+  Heart,
   MapPin,
-  ShieldCheck,
-  X,
+  MessageCircle,
 } from "lucide-react";
-
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-
-import { useEffect, useState } from "react";
+import { useAuth } from "../hooks/AuthContext";
 import { getCollegeById } from "../services/collegeService";
-
+import { isCollegeSaved, removeSavedCollege, saveCollege } from "../services/savedCollegeService";
+import { trackEvent } from "../services/analytics";
+import { displayValue } from "../utils/display";
+import { Disclaimer } from "../components/Disclaimer";
+import { Seo } from "../components/Seo";
+import { LoadingSkeleton, EmptyState } from "../components/ui/States";
+import { WhatsAppButton } from "../components/WhatsAppButton";
 import type { College } from "../types";
 
 const CollegeDetails = () => {
-  const [searchParams] =
-    useSearchParams();
-
-  const ids = useMemo(
-    () =>
-      searchParams
-        .get("ids")
-        ?.split(",")
-        .filter(Boolean) ?? [],
-    [searchParams]
-  );
-
-  const [colleges, setColleges] =
-    useState<College[]>([]);
-
-  const [loading, setLoading] =
-    useState(true);
+  const { collegeId } = useParams();
+  const { user } = useAuth();
+  const [college, setCollege] = useState<College | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const load = async () => {
+      if (!collegeId) return;
       setLoading(true);
-
       try {
-        const results =
-          await Promise.all(
-            ids
-              .slice(0, 3)
-              .map((id) =>
-                getCollegeById(id)
-              )
-          );
-
-        setColleges(
-          results.filter(
-            (
-              college
-            ): college is College =>
-              college !== null
-          )
-        );
-      } catch (error) {
-        console.error(error);
+        const data = await getCollegeById(collegeId);
+        setCollege(data);
+        if (data) trackEvent("college_view", { collegeId: data.id });
+        if (user && data) {
+          setSaved(await isCollegeSaved(user.uid, data.id));
+        }
       } finally {
         setLoading(false);
       }
     };
+    load();
+  }, [collegeId, user]);
 
-    if (ids.length > 0) {
-      load();
-    } else {
-      (async () => setLoading(false))();
-    }
-  }, [ids]);
-
-  if (loading) {
+  if (loading) return <LoadingSkeleton label="Loading college" />;
+  if (!college) {
     return (
-      <>
-        <Navbar />
-
-        <div className="flex min-h-[70vh] items-center justify-center">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-200 border-t-black" />
-        </div>
-
-        <Footer />
-      </>
+      <div className="mx-auto max-w-3xl px-4 py-16">
+        <EmptyState
+          title="College not found"
+          description="This college profile is unavailable. Return to discovery and try another listing."
+        />
+      </div>
     );
   }
 
+  const toggleSave = async () => {
+    if (!user) return;
+    if (saved) {
+      await removeSavedCollege(user.uid, college.id);
+      setSaved(false);
+    } else {
+      await saveCollege(user.uid, college);
+      setSaved(true);
+      trackEvent("college_saved", { collegeId: college.id });
+    }
+  };
+
+  const sections: { title: string; body: string }[] = [
+    { title: "Overview", body: college.description || displayValue() },
+    { title: "University", body: displayValue(college.university) },
+    { title: "College type", body: displayValue(college.collegeType) },
+    { title: "TNEA code", body: displayValue(college.tneaCode) },
+    { title: "Eligibility", body: displayValue(college.eligibility) },
+    { title: "Admission", body: displayValue(college.admissionNotes) },
+    { title: "Tuition fees", body: displayValue(college.fees?.tuition || college.feeRange) },
+    { title: "Hostel", body: displayValue(college.hostel?.details || (college.hostelAvailable ? "Available" : undefined)) },
+    { title: "Facilities", body: college.facilities?.join(", ") || displayValue() },
+    {
+      title: "Placement",
+      body: [
+        college.placements?.rate && `Rate: ${college.placements.rate}`,
+        college.placements?.averagePackage && `Average: ${college.placements.averagePackage}`,
+        college.placements?.highestPackage && `Highest: ${college.placements.highestPackage}`,
+      ]
+        .filter(Boolean)
+        .join(" · ") || displayValue(),
+    },
+    { title: "Recruiters", body: college.recruiters?.join(", ") || displayValue() },
+    { title: "Accreditation", body: displayValue(college.accreditation || college.naacGrade) },
+    { title: "Rankings", body: displayValue(college.nirfRank) },
+    { title: "Contact", body: displayValue(college.phone || college.email || college.contact?.phone) },
+  ];
+
   return (
-    <>
-      <Navbar />
+    <main className="min-h-screen bg-slate-50">
+      <Seo
+        title={college.name}
+        description={college.description?.slice(0, 150) || `Explore ${college.name} in ${college.location}.`}
+        path={`/colleges/${college.id}`}
+      />
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <Link to="/colleges" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600">
+          <ArrowLeft className="h-4 w-4" /> Back to colleges
+        </Link>
 
-      <main className="min-h-screen bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
-          <Link
-            to="/colleges"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Colleges
-          </Link>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[2fr_1fr]">
+          <div>
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white">
+              {college.logo || college.images?.[0] ? (
+                <img
+                  src={college.images?.[0] || college.logo}
+                  alt=""
+                  className="h-56 w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-40 items-center justify-center bg-teal-50 font-heading text-4xl font-black text-teal-800">
+                  {college.name.charAt(0)}
+                </div>
+              )}
+              <div className="p-6">
+                <p className="text-sm font-semibold text-teal-700">{college.collegeType || "College"}</p>
+                <h1 className="mt-1 font-heading text-3xl font-extrabold text-slate-900">{college.name}</h1>
+                <p className="mt-2 flex items-center gap-2 text-slate-600">
+                  <MapPin className="h-4 w-4" /> {displayValue(college.location)}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {(college.courses ?? []).slice(0, 8).map((course) => (
+                    <span key={course} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium">
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
 
-          <div className="mt-8">
-            <h1 className="text-3xl font-black text-gray-950 md:text-4xl">
-              Compare Colleges
-            </h1>
-
-            <p className="mt-2 text-gray-500">
-              Compare up to three colleges
-              side by side.
-            </p>
+            <div className="mt-6 space-y-4">
+              {sections.map((section) => (
+                <section key={section.title} className="rounded-3xl border border-slate-200 bg-white p-6">
+                  <h2 className="font-heading text-lg font-bold">{section.title}</h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">{section.body}</p>
+                </section>
+              ))}
+              {college.faqs && college.faqs.length > 0 && (
+                <section className="rounded-3xl border border-slate-200 bg-white p-6">
+                  <h2 className="font-heading text-lg font-bold">Frequently asked questions</h2>
+                  <dl className="mt-4 space-y-4">
+                    {college.faqs.map((faq) => (
+                      <div key={faq.question}>
+                        <dt className="font-semibold">{faq.question}</dt>
+                        <dd className="mt-1 text-sm text-slate-600">{faq.answer}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </section>
+              )}
+              <Disclaimer kind="college" />
+              {college.placements && <Disclaimer kind="placement" />}
+            </div>
           </div>
 
-          {colleges.length < 2 ? (
-            <div className="mt-8 rounded-3xl border border-gray-200 bg-white p-12 text-center">
-              <h2 className="text-xl font-bold">
-                Select at least two colleges
-              </h2>
-
-              <p className="mt-2 text-sm text-gray-500">
-                Return to the college discovery
-                page and choose colleges to
-                compare.
-              </p>
-
-              <Link
-                to="/colleges"
-                className="mt-6 inline-flex rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white"
+          <aside className="space-y-4 lg:sticky lg:top-28 h-fit">
+            <div className="rounded-3xl border border-slate-200 bg-white p-6">
+              <button
+                type="button"
+                onClick={toggleSave}
+                className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold"
               >
-                Explore Colleges
+                <Heart className={`h-4 w-4 ${saved ? "fill-rose-500 text-rose-500" : ""}`} />
+                {saved ? "Saved" : "Save college"}
+              </button>
+              <Link
+                to={`/compare?ids=${college.id}`}
+                className="mb-3 flex w-full items-center justify-center rounded-xl border px-4 py-2.5 text-sm font-semibold"
+              >
+                Add to compare
               </Link>
+              <Link
+                to={`/tnea/predictor?college=${college.id}`}
+                className="mb-3 flex w-full items-center justify-center rounded-xl bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white"
+              >
+                Check my admission chance
+              </Link>
+              <Link
+                to={`/counselling?college=${encodeURIComponent(college.name)}`}
+                className="mb-3 flex w-full items-center justify-center rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white"
+              >
+                Get counselling
+              </Link>
+              <WhatsAppButton
+                source="college-page"
+                message={`I want to know if ${college.name} suits my rank.`}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white"
+              >
+                <MessageCircle className="h-4 w-4" /> Talk to an expert
+              </WhatsAppButton>
+              <p className="mt-4 text-sm text-slate-600">
+                Want to know if this college suits your rank?
+              </p>
             </div>
-          ) : (
-            <div className="mt-8 overflow-x-auto rounded-3xl border border-gray-200 bg-white">
-              <table className="w-full min-w-[800px] border-collapse">
-                <thead>
-                  <tr>
-                    <th className="w-48 border-b border-r border-gray-200 p-5 text-left text-sm font-bold">
-                      Compare
-                    </th>
-
-                    {colleges.map(
-                      (college) => (
-                        <th
-                          key={
-                            college.id
-                          }
-                          className="border-b border-gray-200 p-5 text-left align-top"
-                        >
-                          <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-gray-100 text-2xl font-black">
-                            {college.logo ? (
-                              <img
-                                src={
-                                  college.logo
-                                }
-                                alt=""
-                                className="h-full w-full object-cover"
-                              />
-                            ) : (
-                              college.name.charAt(
-                                0
-                              )
-                            )}
-                          </div>
-
-                          <h2 className="mt-4 text-lg font-bold text-gray-950">
-                            {college.name}
-                          </h2>
-
-                          {college.verified && (
-                            <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold">
-                              <ShieldCheck className="h-4 w-4" />
-                              Verified
-                            </span>
-                          )}
-                        </th>
-                      )
-                    )}
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <CompareRow
-                    label="Location"
-                    colleges={colleges}
-                    render={(college) => (
-                      <div className="flex items-start gap-2">
-                        <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                        {college.location}
-                      </div>
-                    )}
-                  />
-
-                  <CompareRow
-                    label="District"
-                    colleges={colleges}
-                    render={(college) =>
-                      college.district ||
-                      "—"
-                    }
-                  />
-
-                  <CompareRow
-                    label="State"
-                    colleges={colleges}
-                    render={(college) =>
-                      college.state ||
-                      "—"
-                    }
-                  />
-
-                  <CompareRow
-                    label="Verification"
-                    colleges={colleges}
-                    render={(college) =>
-                      college.verified ? (
-                        <span className="inline-flex items-center gap-1 font-semibold">
-                          <CheckCircle2 className="h-4 w-4" />
-                          Verified
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 text-gray-400">
-                          <X className="h-4 w-4" />
-                          Not verified
-                        </span>
-                      )
-                    }
-                  />
-
-                  <CompareRow
-                    label="Courses"
-                    colleges={colleges}
-                    render={(college) => (
-                      <div className="flex flex-wrap gap-2">
-                        {(
-                          college.courses ??
-                          []
-                        ).length > 0 ? (
-                          (
-                            college.courses ??
-                            []
-                          ).map(
-                            (
-                              course
-                            ) => (
-                              <span
-                                key={
-                                  course
-                                }
-                                className="rounded-full bg-gray-100 px-2.5 py-1 text-xs"
-                              >
-                                {course}
-                              </span>
-                            )
-                          )
-                        ) : (
-                          <span className="text-gray-400">
-                            Not available
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  />
-
-                  <CompareRow
-                    label="Website"
-                    colleges={colleges}
-                    render={(college) =>
-                      college.website ? (
-                        <a
-                          href={
-                            college.website
-                          }
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-semibold underline"
-                        >
-                          Visit Website
-                        </a>
-                      ) : (
-                        "—"
-                      )
-                    }
-                  />
-
-                  <CompareRow
-                    label="Actions"
-                    colleges={colleges}
-                    render={(college) => (
-                      <div className="flex flex-wrap gap-2">
-                        <Link
-                          to={`/colleges/${college.id}`}
-                          className="rounded-xl bg-black px-4 py-2 text-xs font-semibold text-white"
-                        >
-                          View Details
-                        </Link>
-
-                        <Link
-                          to={`/colleges/${college.id}/apply`}
-                          className="rounded-xl border border-gray-300 px-4 py-2 text-xs font-semibold"
-                        >
-                          Apply
-                        </Link>
-                      </div>
-                    )}
-                  />
-                </tbody>
-              </table>
-            </div>
-          )}
+          </aside>
         </div>
-      </main>
-
-      <Footer />
-    </>
+      </div>
+    </main>
   );
 };
-
-const CompareRow = ({
-  label,
-  colleges,
-  render,
-}: {
-  label: string;
-  colleges: College[];
-  render: (
-    college: College
-  ) => React.ReactNode;
-}) => (
-  <tr>
-    <td className="border-b border-r border-gray-200 bg-gray-50 p-5 text-sm font-bold text-gray-700">
-      {label}
-    </td>
-
-    {colleges.map((college) => (
-      <td
-        key={college.id}
-        className="border-b border-gray-200 p-5 text-sm text-gray-600"
-      >
-        {render(college)}
-      </td>
-    ))}
-  </tr>
-);
 
 export default CollegeDetails;

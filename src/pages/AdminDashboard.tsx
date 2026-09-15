@@ -79,7 +79,7 @@ const AdminDashboard = () => {
                 </h1>
 
                 <p className="mt-3 text-indigo-200">
-                  Manage the CollegeCrop admission platform.
+                  Manage the Go2College admission platform.
                 </p>
               </div>
 
@@ -167,6 +167,14 @@ const AdminDashboard = () => {
               description="Manage scholarships and financial aid."
               link="/admin/scholarships"
             />
+            <AdminMenu icon={<Building2 className="h-6 w-6" />} title="Cutoffs" description="Historical TNEA cut-off records." link="/admin/cutoffs" />
+            <AdminMenu icon={<FileText className="h-6 w-6" />} title="Updates" description="Admission news and TNEA alerts." link="/admin/admissions" />
+            <AdminMenu icon={<FileText className="h-6 w-6" />} title="Blog" description="Publish education articles." link="/admin/blog" />
+            <AdminMenu icon={<Mail className="h-6 w-6" />} title="Leads" description="WhatsApp, forms and counselling leads." link="/admin/leads" />
+            <AdminMenu icon={<Users className="h-6 w-6" />} title="Counselling" description="Manage counselling requests." link="/admin/counselling" />
+            <AdminMenu icon={<CheckCircle2 className="h-6 w-6" />} title="Settings" description="WhatsApp number and contact details." link="/admin/settings" />
+            <AdminMenu icon={<FileText className="h-6 w-6" />} title="FAQs" description="Public frequently asked questions." link="/admin/faqs" />
+            <AdminMenu icon={<Users className="h-6 w-6" />} title="Testimonials" description="Approve genuine student stories." link="/admin/testimonials" />
           </div>
         </section>
       </main>
