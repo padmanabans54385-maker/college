@@ -79,8 +79,8 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
   };
 
   return (
-    <article className="surface-card card-interactive group overflow-hidden">
-      <div className="relative h-52 overflow-hidden bg-gray-100">
+    <article className="surface-card card-interactive group overflow-hidden border border-[#cdddc9] bg-white rounded-3xl shadow-sm hover:shadow-md">
+      <div className="relative h-52 overflow-hidden bg-[#dce8da]">
         {college.logo ? (
           <img
             src={college.logo}
@@ -88,15 +88,15 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-5xl font-bold text-gray-300">
+          <div className="flex h-full items-center justify-center font-heading text-5xl font-bold text-[#143527]/40">
             {college.name.charAt(0)}
           </div>
         )}
 
         <div className="absolute left-4 top-4">
           {college.verified && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-gray-900 shadow">
-              <ShieldCheck className="h-4 w-4" />
+            <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1 text-xs font-bold text-[#143527] shadow-xs">
+              <ShieldCheck className="h-4 w-4 text-[#143527]" />
               Verified
             </span>
           )}
@@ -112,13 +112,13 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
                 ? "Remove from saved colleges"
                 : "Save college"
             }
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow transition hover:scale-105"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#cdddc9] bg-white shadow-xs transition hover:scale-105"
           >
             <Heart
               className={`h-5 w-5 ${
                 saved
-                  ? "fill-black text-black"
-                  : "text-gray-700"
+                  ? "fill-[#143527] text-[#143527]"
+                  : "text-[#577063]"
               }`}
             />
           </button>
@@ -126,23 +126,23 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-950">
+        <h3 className="font-heading text-xl font-bold text-[#142e23]">
           {college.name}
         </h3>
 
-        <div className="mt-2 flex items-center gap-2 text-sm text-gray-500">
-          <MapPin className="h-4 w-4" />
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#577063]">
+          <MapPin className="h-4 w-4 text-[#143527]" />
           {college.location}, {college.district}
         </div>
 
-        <p className="mt-4 line-clamp-2 text-sm leading-6 text-gray-600">
+        <p className="mt-4 line-clamp-2 text-sm leading-6 text-[#465f51]">
           {college.description}
         </p>
 
         <div className="mt-6 flex items-center justify-between">
           <Link
             to={`/colleges/${college.id}`}
-            className="inline-flex items-center gap-2 rounded-xl bg-black px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-gray-800"
+            className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-4 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
           >
             View Details
             <ArrowRight className="h-4 w-4" />
@@ -150,7 +150,7 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
 
           <Link
             to={`/colleges/${college.id}/apply`}
-            className="text-sm font-semibold text-gray-700 hover:text-black"
+            className="text-sm font-semibold text-[#143527] hover:underline"
           >
             Apply Now
           </Link>

@@ -71,25 +71,26 @@ const CollegeDashboard = () => {
 
   if (!profile?.collegeId) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
         <Navbar />
 
         <main className="flex min-h-[70vh] items-center justify-center px-5">
           <div className="max-w-md text-center">
-            <Building2 className="mx-auto h-14 w-14 text-gray-400" />
+            <Building2 className="mx-auto h-14 w-14 text-[#577063]" />
 
-            <h1 className="mt-5 text-3xl font-bold">
+            <h1 className="mt-5 font-heading text-3xl font-bold text-[#143527]">
               College account not configured
             </h1>
 
-            <p className="mt-3 text-gray-500">
+            <p className="mt-3 text-sm text-[#577063]">
               This college account has not been connected to a
               college profile yet.
             </p>
 
             <button
+              type="button"
               onClick={handleLogout}
-              className="mt-6 rounded-xl bg-black px-6 py-3 font-semibold text-white"
+              className="mt-6 rounded-full bg-[#143527] px-8 py-3 font-semibold text-white hover:bg-[#0b2017] transition"
             >
               Logout
             </button>
@@ -103,11 +104,11 @@ const CollegeDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
         <Navbar />
 
         <div className="mx-auto max-w-7xl px-5 py-16">
-          <div className="h-80 animate-pulse rounded-3xl bg-gray-200" />
+          <div className="h-80 animate-pulse rounded-3xl bg-[#cdddc9]/40" />
         </div>
       </div>
     );
@@ -126,24 +127,24 @@ const CollegeDashboard = () => {
   ).length;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
       <Navbar />
 
       <main>
-        <section className="bg-black text-white">
-          <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
+        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-12">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-gray-300">
-                  <Building2 className="h-4 w-4" />
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
+                  <Building2 className="h-4 w-4 text-[#143527]" />
                   College Portal
                 </div>
 
-                <h1 className="text-3xl font-bold sm:text-4xl">
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527] sm:text-4xl">
                   {college?.name || profile.name}
                 </h1>
 
-                <p className="mt-3 text-gray-400">
+                <p className="mt-2 text-[#577063]">
                   Manage admissions, enquiries and applications.
                 </p>
               </div>
@@ -151,15 +152,16 @@ const CollegeDashboard = () => {
               <div className="flex gap-3">
                 <Link
                   to={`/colleges/${profile.collegeId}`}
-                  className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-black"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white transition hover:bg-[#0b2017]"
                 >
                   View Profile
                   <ArrowRight className="h-4 w-4" />
                 </Link>
 
                 <button
+                  type="button"
                   onClick={handleLogout}
-                  className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 font-semibold"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-5 py-3 font-semibold text-[#143527] transition hover:bg-[#143527] hover:text-white"
                 >
                   <LogOut className="h-4 w-4" />
                   Logout
@@ -198,11 +200,11 @@ const CollegeDashboard = () => {
           </div>
 
           {/* Applications */}
-          <section className="mt-8 rounded-3xl border border-gray-200 bg-white">
-            <div className="flex items-center justify-between border-b border-gray-200 p-6 sm:p-7">
+          <div className="mt-10 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
+            <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold">
-                  Applications
+                <h2 className="font-heading text-2xl font-bold text-[#143527]">
+                  Recent Applications
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500">
@@ -267,16 +269,16 @@ const CollegeDashboard = () => {
                 ))}
               </div>
             )}
-          </section>
+          </div>
 
           {/* Enquiries */}
-          <section className="mt-8 rounded-3xl border border-gray-200 bg-white">
-            <div className="border-b border-gray-200 p-6 sm:p-7">
-              <h2 className="text-2xl font-bold">
+          <div className="mt-8 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
+            <div className="mb-6">
+              <h2 className="font-heading text-2xl font-bold text-[#143527]">
                 Admission Enquiries
               </h2>
 
-              <p className="mt-1 text-sm text-gray-500">
+              <p className="mt-1 text-sm text-[#577063]">
                 Students who have shown interest in your college.
               </p>
             </div>
@@ -326,7 +328,7 @@ const CollegeDashboard = () => {
                 ))}
               </div>
             )}
-          </section>
+          </div>
         </section>
       </main>
 

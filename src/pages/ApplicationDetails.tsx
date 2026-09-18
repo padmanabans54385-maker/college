@@ -88,58 +88,58 @@ const ApplicationDetails = () => {
 
   if (loading) {
     return (
-      <>
+      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
         <Navbar />
         <div className="flex min-h-[70vh] items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#143527]" />
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 
   if (error || !application) {
     return (
-      <>
+      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
         <Navbar />
         <div className="flex min-h-[70vh] flex-col items-center justify-center gap-4 px-5 text-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
             <XCircle className="h-8 w-8 text-red-500" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-950">
+          <h1 className="font-heading text-2xl font-bold text-[#143527]">
             {error || "Application not found"}
           </h1>
           <Link
-            to="/dashboard/student"
-            className="mt-2 inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            to="/dashboard"
+            className="mt-2 inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0b2017]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
           </Link>
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 
   const status = statusConfig[application.status];
 
   return (
-    <>
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
       <Navbar />
-      <main className="min-h-screen bg-gray-50 px-5 py-10 lg:px-8">
+      <main className="px-5 py-10 lg:px-8">
         <div className="mx-auto max-w-4xl">
           {/* Back */}
           <Link
-            to="/dashboard/student"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 transition hover:text-gray-900"
+            to="/dashboard"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#577063] transition hover:text-[#143527]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
           </Link>
 
           {/* Header */}
-          <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+          <div className="mt-6 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -257,8 +257,8 @@ const ApplicationDetails = () => {
           {/* Actions */}
           <div className="mt-6 flex justify-end">
             <Link
-              to="/dashboard/student"
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 transition hover:border-gray-400"
+              to="/dashboard"
+              className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-white px-6 py-2.5 text-sm font-semibold text-[#143527] transition hover:bg-[#e6f0e4]"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Dashboard
@@ -267,7 +267,7 @@ const ApplicationDetails = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -398,34 +398,34 @@ const Colleges = () => {
 
   return (
     <>
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-[#edf4ec]">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-slate-950 py-16 text-white lg:py-24">
-          <div className="absolute top-0 right-0 h-96 w-96 bg-indigo-600/20 blur-[130px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 h-80 w-80 bg-emerald-500/10 blur-[100px] pointer-events-none" />
+        <section className="relative overflow-hidden bg-[#dce8da] py-16 text-[#142e23] border-b border-[#cdddc9]/60 lg:py-20">
+          <div className="absolute top-0 right-0 h-96 w-96 bg-[#2e694d]/15 blur-[130px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 h-80 w-80 bg-[#143527]/10 blur-[100px] pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-bold text-indigo-400">
-                <Search className="h-3.5 w-3.5" />
-                ACCREDITED COLLEGE DIRECTORY
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#143527]">
+                <Search className="h-3.5 w-3.5 text-[#143527]" />
+                Accredited College Directory
               </div>
 
-              <h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl text-white">
+              <h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl text-[#142e23]">
                 Find the Right College <br className="hidden sm:inline" />
-                <span className="text-indigo-400">For Your Career Path</span>
+                <span className="font-serif-italic font-normal italic text-[#143527]">For Your Career Path</span>
               </h1>
 
-              <p className="mt-4 text-base leading-relaxed text-slate-400 md:text-lg">
+              <p className="mt-4 text-base leading-relaxed text-[#465f51] md:text-lg">
                 Explore accredited engineering, medical, management, and science colleges across Tamil Nadu. Filter by district, degree course, or cut-offs.
               </p>
             </div>
 
             {/* Search */}
-            <div className="mt-8 rounded-3xl border border-slate-700 bg-slate-900/90 p-3 shadow-2xl backdrop-blur-xl">
+            <div className="mt-8 rounded-3xl border border-[#cdddc9] bg-white p-3 shadow-lg">
               <div className="flex flex-col gap-2 md:flex-row">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#577063]" />
                   <input
                     value={filters.search}
                     onChange={(event) =>
@@ -434,14 +434,14 @@ const Colleges = () => {
                       })
                     }
                     placeholder="Search college name, city, district, or degree..."
-                    className="w-full rounded-2xl bg-slate-950 border border-slate-800 px-12 py-3.5 text-sm text-white placeholder-slate-500 outline-none focus:border-indigo-500"
+                    className="w-full rounded-2xl bg-[#edf4ec]/50 border border-[#cdddc9] px-12 py-3.5 text-sm text-[#142e23] placeholder-[#577063]/60 outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20"
                   />
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-800 px-5 py-3 text-sm font-semibold text-white md:hidden"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#143527] px-5 py-3 text-sm font-semibold text-white md:hidden"
                 >
                   <SlidersHorizontal className="h-4 w-4" />
                   Filter Options
@@ -879,9 +879,9 @@ const CollegeDiscoveryCard = ({
   onCompare: () => void;
 }) => {
   return (
-    <article className="surface-card card-interactive shimmer-card group flex flex-col justify-between overflow-hidden">
+    <article className="surface-card card-interactive shimmer-card group flex flex-col justify-between overflow-hidden border border-[#cdddc9] bg-white rounded-3xl shadow-sm hover:shadow-md">
       <div>
-        <div className="relative h-48 overflow-hidden bg-slate-100">
+        <div className="relative h-48 overflow-hidden bg-[#dce8da]">
           {college.logo ? (
             <img
               src={college.logo}
@@ -889,21 +889,21 @@ const CollegeDiscoveryCard = ({
               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-700 text-5xl font-heading font-black text-white">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#143527] to-[#1a4332] text-5xl font-heading font-black text-white">
               {college.name.charAt(0)}
             </div>
           )}
 
           <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
             {college.verified && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500 px-3 py-1 text-[11px] font-bold text-white shadow-md">
-                <ShieldCheck className="h-3.5 w-3.5" />
+              <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1 text-[11px] font-bold text-[#143527] shadow-xs">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#143527]" />
                 Verified
               </span>
             )}
 
             {recommended && (
-              <span className="rounded-full bg-indigo-600 px-3 py-1 text-[11px] font-bold text-white shadow-md">
+              <span className="rounded-full bg-[#143527] px-3 py-1 text-[11px] font-bold text-white shadow-xs">
                 Recommended
               </span>
             )}
@@ -912,31 +912,31 @@ const CollegeDiscoveryCard = ({
           <button
             type="button"
             onClick={onSave}
-            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur-md shadow-md transition hover:scale-110"
+            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#cdddc9] bg-white/90 backdrop-blur-md shadow-xs transition hover:scale-110"
             aria-label={saved ? "Remove saved college" : "Save college"}
           >
             <Heart
               className={`h-4 w-4 transition-colors ${
-                saved ? "fill-rose-500 text-rose-500" : "text-slate-600 hover:text-rose-500"
+                saved ? "fill-[#143527] text-[#143527]" : "text-[#577063] hover:text-[#143527]"
               }`}
             />
           </button>
         </div>
 
         <div className="p-5">
-          <h3 className="line-clamp-2 font-heading text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+          <h3 className="line-clamp-2 font-heading text-lg font-bold text-[#142e23] group-hover:text-[#143527] transition-colors">
             {college.name}
           </h3>
 
-          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-slate-500">
-            <MapPin className="h-3.5 w-3.5 text-indigo-500 shrink-0" />
+          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#577063]">
+            <MapPin className="h-3.5 w-3.5 text-[#143527] shrink-0" />
             <span>
               {college.location}
               {college.district ? `, ${college.district}` : ""}
             </span>
           </div>
 
-          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-slate-600">
+          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#465f51]">
             {college.description}
           </p>
 
@@ -945,7 +945,7 @@ const CollegeDiscoveryCard = ({
               {college.courses.slice(0, 3).map((course) => (
                 <span
                   key={course}
-                  className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600"
+                  className="rounded-full border border-[#cdddc9] bg-[#e6f0e4]/60 px-2.5 py-1 text-[11px] font-medium text-[#143527]"
                 >
                   {course}
                 </span>
@@ -959,14 +959,14 @@ const CollegeDiscoveryCard = ({
         <div className="grid grid-cols-2 gap-2">
           <Link
             to={`/colleges/${college.id}`}
-            className="rounded-xl bg-teal-700 px-3 py-2.5 text-center text-xs font-semibold text-white shadow-md transition hover:bg-teal-800"
+            className="rounded-full bg-[#143527] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
           >
             View Details
           </Link>
 
           <Link
             to={`/colleges/${college.id}/apply`}
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-center text-xs font-semibold text-slate-800 transition hover:border-teal-200 hover:bg-teal-50 hover:text-teal-800"
+            className="rounded-full border border-[#cdddc9] bg-[#edf4ec]/60 px-3 py-2.5 text-center text-xs font-semibold text-[#142e23] transition hover:bg-[#dce8da] hover:text-[#143527]"
           >
             Apply Now
           </Link>
@@ -976,7 +976,7 @@ const CollegeDiscoveryCard = ({
           type="button"
           onClick={onCompare}
           disabled={!canCompare}
-          className={`mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition ${
+          className={`mt-2 flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold transition ${
             comparing
               ? "bg-slate-900 text-white"
               : canCompare

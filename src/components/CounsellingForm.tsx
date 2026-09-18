@@ -53,10 +53,10 @@ export const CounsellingForm = ({ source = "counselling" }: { source?: string })
   };
 
   const fieldClass =
-    "w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none focus:border-teal-600";
+    "w-full rounded-xl border border-[#cdddc9] bg-[#edf4ec]/40 px-3.5 py-2.5 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20";
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4 rounded-3xl border border-slate-200 bg-white p-6">
+    <form onSubmit={onSubmit} className="grid gap-4 rounded-3xl border border-[#cdddc9] bg-white p-6 sm:p-8 shadow-md">
       <div className="grid gap-4 sm:grid-cols-2">
         <input name="name" required placeholder="Your name" className={fieldClass} defaultValue={profile?.name} />
         <input name="studentName" required placeholder="Student name" className={fieldClass} />
@@ -85,12 +85,12 @@ export const CounsellingForm = ({ source = "counselling" }: { source?: string })
       <button
         type="submit"
         disabled={status === "saving"}
-        className="rounded-xl bg-teal-700 px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+        className="rounded-full bg-[#143527] px-6 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#0b2017] hover:shadow-lg disabled:opacity-60"
       >
         {status === "saving" ? "Submitting…" : "Request counselling"}
       </button>
-      {status === "done" && <p className="text-sm text-emerald-700">Request received. A counsellor will follow up.</p>}
-      {status === "error" && <p className="text-sm text-rose-600">Could not submit. Please try again.</p>}
+      {status === "done" && <p className="text-sm font-semibold text-emerald-800">✓ Request received. A counsellor will follow up.</p>}
+      {status === "error" && <p className="text-sm font-semibold text-rose-600">Could not submit. Please try again.</p>}
     </form>
   );
 };

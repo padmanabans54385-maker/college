@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
+  ArrowLeft,
   Building2,
   Save,
 } from "lucide-react";
+
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 import { useAuth } from "../hooks/AuthContext";
 
@@ -115,20 +120,30 @@ const CollegeProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b bg-white">
-        <div className="mx-auto max-w-5xl px-6 py-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-black text-white">
-              <Building2 size={21} />
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <Navbar />
+
+      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+        <div className="mx-auto max-w-5xl px-5 py-8 sm:px-6 lg:px-8">
+          <Link
+            to="/college"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            College Dashboard
+          </Link>
+
+          <div className="mt-4 flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white">
+              <Building2 size={22} />
             </div>
 
             <div>
-              <h1 className="text-2xl font-bold">
+              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
                 College Profile
               </h1>
 
-              <p className="text-sm text-gray-500">
+              <p className="mt-1 text-sm text-[#577063]">
                 Manage the information students see.
               </p>
             </div>
@@ -136,7 +151,7 @@ const CollegeProfile = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6 py-8">
+      <main className="mx-auto max-w-5xl px-5 py-8 sm:px-6 lg:px-8">
         <div className="rounded-3xl border bg-white p-7">
           <div className="mb-8">
             <h2 className="text-xl font-bold">
@@ -289,6 +304,8 @@ const CollegeProfile = () => {
           </div>
         )}
       </main>
+
+      <Footer />
     </div>
   );
 };

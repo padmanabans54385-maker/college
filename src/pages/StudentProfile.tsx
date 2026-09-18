@@ -319,25 +319,24 @@ const StudentProfile = () => {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-[#edf4ec]">
         <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
           {/* Header */}
           <div className="mb-8">
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Dashboard
             </Link>
 
-            <h1 className="mt-6 text-3xl font-black text-gray-950">
-              My Profile
+            <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#142e23]">
+              My <span className="font-serif-italic font-normal italic text-[#143527]">profile</span>
             </h1>
 
-            <p className="mt-2 text-gray-500">
-              Keep your information updated to get
-              better college recommendations.
+            <p className="mt-2 text-sm text-[#577063]">
+              Keep your profile and academic cutoff info updated to get accurate TNEA recommendations.
             </p>
           </div>
 
@@ -346,14 +345,14 @@ const StudentProfile = () => {
             className="space-y-6"
           >
             {/* Profile photo */}
-            <section className="rounded-3xl border border-gray-200 bg-white p-6">
+            <section className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
               <SectionTitle
                 title="Profile Photo"
                 description="Add a photo to personalize your student profile."
               />
 
               <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-                <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-gray-100">
+                <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-[#cdddc9] bg-[#dce8da]">
                   {profileImage ? (
                     <img
                       src={profileImage}
@@ -361,18 +360,18 @@ const StudentProfile = () => {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <UserRound className="h-12 w-12 text-gray-400" />
+                    <UserRound className="h-12 w-12 text-[#143527]" />
                   )}
 
                   {uploadingImage && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#143527]/70">
                       <Loader2 className="h-7 w-7 animate-spin text-white" />
                     </div>
                   )}
                 </div>
 
                 <div>
-                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-black px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-800">
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#143527] px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]">
                     <Camera className="h-4 w-4" />
                     Upload Photo
 
@@ -599,17 +598,16 @@ const StudentProfile = () => {
 
             {/* Save */}
             <div className="sticky bottom-4 z-10">
-              <div className="flex flex-col justify-between gap-4 rounded-2xl border border-gray-200 bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center">
+              <div className="flex flex-col justify-between gap-4 rounded-3xl border border-[#cdddc9] bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center">
                 <div>
                   {saved ? (
-                    <div className="flex items-center gap-2 text-sm font-semibold text-gray-900">
+                    <div className="flex items-center gap-2 text-sm font-bold text-emerald-800">
                       <Check className="h-4 w-4" />
                       Profile saved successfully
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500">
-                      Keep your profile updated for
-                      better recommendations.
+                    <p className="text-sm font-medium text-[#577063]">
+                      Keep your profile updated for accurate TNEA recommendations.
                     </p>
                   )}
                 </div>
@@ -617,7 +615,7 @@ const StudentProfile = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0b2017] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {saving ? (
                     <>

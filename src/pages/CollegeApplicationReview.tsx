@@ -94,20 +94,20 @@ const CollegeApplicationReview = () => {
 
   if (!application) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
         <Navbar />
 
         <main className="flex min-h-[70vh] items-center justify-center px-5">
           <div className="text-center">
-            <FileText className="mx-auto h-14 w-14 text-gray-400" />
+            <FileText className="mx-auto h-14 w-14 text-[#577063]" />
 
-            <h1 className="mt-5 text-3xl font-bold">
+            <h1 className="mt-5 font-heading text-3xl font-bold text-[#143527]">
               Application not found
             </h1>
 
             <Link
               to="/college"
-              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-black px-6 py-3 font-semibold text-white"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white hover:bg-[#0b2017] transition"
             >
               <ArrowLeft className="h-4 w-4" />
               College Dashboard
@@ -121,30 +121,30 @@ const CollegeApplicationReview = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
       <Navbar />
 
       <main>
-        <section className="bg-black text-white">
-          <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
+        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-10">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link
               to="/college"
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
             >
               <ArrowLeft className="h-4 w-4" />
               College Dashboard
             </Link>
 
-            <div className="mt-8">
-              <p className="text-sm text-gray-400">
+            <div className="mt-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#577063]">
                 Application Review
               </p>
 
-              <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
+              <h1 className="mt-1 font-heading text-3xl font-extrabold tracking-tight text-[#143527] sm:text-4xl">
                 {application.personalDetails.fullName}
               </h1>
 
-              <p className="mt-2 text-gray-400">
+              <p className="mt-1 text-sm font-medium text-[#577063]">
                 {application.courseName}
               </p>
             </div>

@@ -221,42 +221,41 @@ const Dashboard = () => {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-gray-50">
+      <main className="min-h-screen bg-[#edf4ec]">
         {/* Header */}
-        <section className="border-b border-gray-200 bg-white">
-          <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8">
-            <div className="flex flex-wrap gap-3 text-sm">
-              <Link to="/my-colleges" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">My colleges</Link>
-              <Link to="/my-choice-list" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Choice lists</Link>
-              <Link to="/my-comparisons" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Comparisons</Link>
-              <Link to="/counselling-request" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Counselling</Link>
-              <Link to="/profile" className="rounded-full bg-teal-50 px-4 py-2 font-semibold text-teal-800">Profile</Link>
+        <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-10">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="flex flex-wrap gap-2 text-sm">
+              <Link to="/my-colleges" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">My colleges</Link>
+              <Link to="/my-choice-list" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Choice lists</Link>
+              <Link to="/my-comparisons" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Comparisons</Link>
+              <Link to="/counselling-request" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Counselling</Link>
+              <Link to="/profile" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Profile</Link>
             </div>
             <div className="mt-8 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
-                  <Sparkles className="h-4 w-4" />
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#143527]">
+                  <Sparkles className="h-4 w-4 text-[#143527]" />
                   Student Portal
                 </div>
 
-                <h1 className="text-3xl font-black tracking-tight text-gray-950 md:text-4xl">
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#142e23] md:text-4xl">
                   Welcome back,{" "}
-                  {profile?.name?.split(" ")[0] ||
-                    "Student"}
+                  <span className="font-serif-italic font-normal italic text-[#143527]">
+                    {profile?.name?.split(" ")[0] || "Student"}
+                  </span>
                   !
                 </h1>
 
-                <p className="mt-2 max-w-2xl text-gray-600">
-                  Track your college applications,
-                  discover opportunities, and continue
-                  your learning journey.
+                <p className="mt-2 max-w-2xl text-base text-[#465f51]">
+                  Track your college applications, cutoff predictions, and admission status.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/colleges"
-                  className="inline-flex items-center gap-2 rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white hover:bg-gray-800"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0b2017]"
                 >
                   <Search className="h-4 w-4" />
                   Find Colleges
@@ -264,7 +263,7 @@ const Dashboard = () => {
 
                 <Link
                   to="/scholarships"
-                  className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-100"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-6 py-3 text-sm font-semibold text-[#143527] transition hover:bg-[#143527]/10"
                 >
                   Scholarships
                 </Link>

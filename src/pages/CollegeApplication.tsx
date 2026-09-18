@@ -420,40 +420,39 @@ const CollegeApplication = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#edf4ec]">
       <Navbar />
 
       <main>
         {/* Header */}
-        <section className="bg-black text-white">
-          <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
+        <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-10 text-[#142e23]">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link
               to={`/colleges/${college.id}`}
-              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to College
             </Link>
 
-            <div className="mt-7">
-              <p className="text-sm font-medium text-gray-400">
-                Applying to
-              </p>
+            <div className="mt-6">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#143527]">
+                Official Admission Application
+              </span>
 
-              <h1 className="mt-2 text-3xl font-bold sm:text-4xl">
-                {college.name}
+              <h1 className="mt-3 font-heading text-3xl font-extrabold sm:text-4xl text-[#142e23]">
+                Applying to <span className="font-serif-italic font-normal italic text-[#143527]">{college.name}</span>
               </h1>
             </div>
           </div>
         </section>
 
-        {/* Progress */}
-        <section className="border-b border-gray-200 bg-white">
+        {/* Progress Stepper */}
+        <section className="border-b border-[#cdddc9] bg-white">
           <div className="mx-auto max-w-5xl px-5 py-7">
             <div className="flex items-center justify-between">
               {steps.map((item, index) => {
                 const Icon = item.icon;
-
                 const active = step >= item.number;
                 const current = step === item.number;
 
@@ -466,8 +465,8 @@ const CollegeApplication = () => {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full border text-sm font-bold transition ${
                           active
-                            ? "border-black bg-black text-white"
-                            : "border-gray-200 bg-white text-gray-400"
+                            ? "border-[#143527] bg-[#143527] text-white shadow-xs"
+                            : "border-[#cdddc9] bg-white text-[#577063]"
                         }`}
                       >
                         {active && step > item.number ? (
@@ -478,10 +477,10 @@ const CollegeApplication = () => {
                       </div>
 
                       <span
-                        className={`mt-2 hidden text-xs font-semibold sm:block ${
+                        className={`mt-2 hidden text-xs font-bold sm:block ${
                           current
-                            ? "text-black"
-                            : "text-gray-400"
+                            ? "text-[#143527]"
+                            : "text-[#577063]"
                         }`}
                       >
                         {item.title}
@@ -490,10 +489,10 @@ const CollegeApplication = () => {
 
                     {index < steps.length - 1 && (
                       <div
-                        className={`mx-3 h-px flex-1 ${
+                        className={`mx-3 h-0.5 flex-1 transition ${
                           step > item.number
-                            ? "bg-black"
-                            : "bg-gray-200"
+                            ? "bg-[#143527]"
+                            : "bg-[#cdddc9]"
                         }`}
                       />
                     )}
@@ -893,7 +892,7 @@ const CollegeApplication = () => {
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="inline-flex h-13 items-center justify-center gap-2 rounded-xl bg-black px-7 font-semibold text-white transition hover:bg-gray-800"
+                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#143527] px-7 font-semibold text-white shadow-md transition hover:bg-[#0b2017]"
                 >
                   Continue
                   <ArrowRight className="h-4 w-4" />
@@ -903,7 +902,7 @@ const CollegeApplication = () => {
                   type="button"
                   onClick={submitApplication}
                   disabled={submitting}
-                  className="inline-flex h-13 items-center justify-center gap-2 rounded-xl bg-black px-7 font-semibold text-white transition hover:bg-gray-800 disabled:opacity-60"
+                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#143527] px-7 font-semibold text-white shadow-md transition hover:bg-[#0b2017] disabled:opacity-60"
                 >
                   {submitting ? (
                     <>

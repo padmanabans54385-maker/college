@@ -1,15 +1,24 @@
 import { Seo } from "../components/Seo";
 import { brand } from "../config/brand";
+import { FileText } from "lucide-react";
 
 const Terms = () => (
-  <main className="mx-auto max-w-3xl px-4 py-12">
-    <Seo title="Terms & Conditions" description="Terms of use for the Go2College platform." path="/terms" />
-    <h1 className="font-heading text-4xl font-extrabold">Terms & conditions</h1>
-    <p className="mt-4 text-sm leading-7 text-slate-600">
-      {brand.name} provides informational tools based on available data. Cut-off predictions and choice lists are estimates
-      and not official allotment. Always verify with institutions and the counselling authority. Use of this website
-      constitutes acceptance of these terms.
-    </p>
+  <main className="bg-[#edf4ec] py-12 sm:py-16">
+    <Seo title="Terms & Conditions" description={`Terms of use for the ${brand.name} platform.`} path="/terms" />
+    <div className="mx-auto max-w-3xl px-4 sm:px-6">
+      <div className="rounded-3xl border border-[#cdddc9] bg-white p-8 sm:p-12 shadow-md">
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#143527]">
+          <FileText className="h-3.5 w-3.5" />
+          User Agreement
+        </div>
+
+        <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#142e23]">Terms & conditions</h1>
+
+        <p className="mt-6 text-base leading-relaxed text-[#465f51]">
+          {brand.name} provides informational tools and counselling guidance based on available published data. Cutoff predictions, rank estimation, and choice lists generated on this platform serve as estimates and do not guarantee official allotment. Users must verify all fee structures, eligibility criteria, and admission schedules directly with institutions and the official counselling authority. Use of this website constitutes acceptance of these terms.
+        </p>
+      </div>
+    </div>
   </main>
 );
 

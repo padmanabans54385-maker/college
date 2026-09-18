@@ -61,31 +61,32 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
       <Navbar />
 
       <main>
-        <section className="bg-gradient-to-r from-indigo-900 to-violet-900 text-white">
-          <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
+        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-12">
+          <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-indigo-200">
-                  <GraduationCap className="h-4 w-4" />
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
+                  <GraduationCap className="h-4 w-4 text-[#143527]" />
                   Admin Portal
                 </div>
 
-                <h1 className="text-4xl font-black">
+                <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-[#143527]">
                   Platform Overview
                 </h1>
 
-                <p className="mt-3 text-indigo-200">
+                <p className="mt-2 text-[#577063]">
                   Manage the Go2College admission platform.
                 </p>
               </div>
 
               <button
+                type="button"
                 onClick={() => logoutUser()}
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-5 py-3 font-semibold transition hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-5 py-2.5 text-sm font-semibold text-[#143527] transition hover:bg-[#143527] hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
                 Logout
@@ -195,19 +196,16 @@ const AdminStat = ({
   value: number;
   loading: boolean;
 }) => (
-  <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-    <div
-      className="w-fit rounded-xl p-3 text-indigo-600"
-      style={{ background: "linear-gradient(135deg, #ede9fe, #e0e7ff)" }}
-    >
+  <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
+    <div className="w-fit rounded-2xl bg-[#e6f0e4] p-3 text-[#143527]">
       {icon}
     </div>
 
-    <p className="mt-6 text-3xl font-black">
+    <p className="mt-6 font-heading text-3xl font-extrabold text-[#143527]">
       {loading ? "—" : value}
     </p>
 
-    <p className="mt-1 text-sm text-gray-500">
+    <p className="mt-1 text-sm font-medium text-[#577063]">
       {label}
     </p>
   </div>
@@ -226,20 +224,17 @@ const AdminMenu = ({
 }) => (
   <Link
     to={link ?? "/admin"}
-    className="block rounded-3xl border border-gray-200 bg-white p-7 transition hover:-translate-y-1 hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-50"
+    className="block rounded-3xl border border-[#cdddc9] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#143527] hover:shadow-lg hover:shadow-[#143527]/5"
   >
-    <div
-      className="w-fit rounded-xl p-3 text-indigo-600"
-      style={{ background: "linear-gradient(135deg, #ede9fe, #e0e7ff)" }}
-    >
+    <div className="w-fit rounded-2xl bg-[#e6f0e4] p-3 text-[#143527]">
       {icon}
     </div>
 
-    <h2 className="mt-5 text-xl font-bold">
+    <h2 className="mt-5 font-heading text-xl font-bold text-[#143527]">
       {title}
     </h2>
 
-    <p className="mt-2 text-sm leading-6 text-gray-500">
+    <p className="mt-2 text-sm leading-6 text-[#577063]">
       {description}
     </p>
   </Link>

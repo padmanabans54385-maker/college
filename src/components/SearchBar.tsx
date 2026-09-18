@@ -52,36 +52,36 @@ export const SearchBar = ({
           event.preventDefault();
           goSearch();
         }}
-        className={`flex items-center gap-3 rounded-2xl border border-slate-200 bg-white shadow-sm ${
+        className={`flex items-center gap-3 rounded-2xl border border-[#cdddc9] bg-white shadow-sm transition focus-within:border-[#143527] focus-within:ring-2 focus-within:ring-[#143527]/15 ${
           size === "lg" ? "px-5 py-4" : "px-4 py-3"
         }`}
       >
-        <Search className="h-5 w-5 text-slate-400" aria-hidden />
+        <Search className="h-5 w-5 text-[#577063]" aria-hidden />
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent text-sm outline-none"
+          className="w-full bg-transparent text-sm text-[#142e23] placeholder-[#577063]/70 outline-none"
           aria-label={placeholder}
         />
         <button
           type="submit"
-          className="rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white"
+          className="rounded-full bg-[#143527] px-5 py-2 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
         >
           Search
         </button>
       </form>
       {open && hits.length > 0 && (
-        <ul className="absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl">
+        <ul className="absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[#cdddc9] bg-white shadow-xl">
           {hits.map((hit) => (
             <li key={`${hit.type}-${hit.id}`}>
               <button
                 type="button"
                 onClick={() => goSearch(hit.href)}
-                className="flex w-full flex-col items-start px-4 py-3 text-left hover:bg-teal-50"
+                className="flex w-full flex-col items-start px-4 py-3 text-left transition hover:bg-[#e6f0e4]"
               >
-                <span className="text-sm font-semibold text-slate-900">{hit.title}</span>
-                <span className="text-xs text-slate-500">
+                <span className="text-sm font-semibold text-[#142e23]">{hit.title}</span>
+                <span className="text-xs font-medium text-[#577063]">
                   {hit.type} {hit.subtitle ? `· ${hit.subtitle}` : ""}
                 </span>
               </button>

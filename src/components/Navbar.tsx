@@ -6,11 +6,11 @@ import {
   LogOut,
   Menu,
   Phone,
+  Sprout,
   User,
   X,
 } from "lucide-react";
 import { useAuth } from "../hooks/AuthContext";
-import { useLanguage } from "../hooks/LanguageContext";
 import { useSettings } from "../hooks/SettingsContext";
 import { logoutUser } from "../firebase/auth";
 import { brand } from "../config/brand";
@@ -20,7 +20,6 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, profile } = useAuth();
-  const { t } = useLanguage();
   const { contact } = useSettings();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false);
@@ -47,14 +46,13 @@ const Navbar = () => {
   };
 
   const links = [
-    { to: "/", label: t.nav.home },
-    { to: "/colleges", label: t.nav.colleges },
-    { to: "/courses", label: t.nav.courses },
-    { to: "/tnea", label: t.nav.tnea },
-    { to: "/compare", label: t.nav.compare },
-    { to: "/scholarships", label: t.nav.scholarships },
-    { to: "/updates", label: t.nav.updates },
-    { to: "/counselling", label: t.nav.counselling },
+    { to: "/", label: "Home" },
+    { to: "/colleges", label: "Colleges" },
+    { to: "/courses", label: "Courses" },
+    { to: "/scholarships", label: "Scholarships" },
+    { to: "/tnea", label: "TNEA Hub" },
+    { to: "/compare", label: "Compare" },
+    { to: "/contact", label: "Contact" },
   ];
 
   const dashboardPath =
@@ -65,22 +63,22 @@ const Navbar = () => {
         : "/dashboard";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-[#cdddc9]/60 bg-[#dce8da]/90 backdrop-blur-md">
       {(contact.phone || contact.phoneSecondary) && (
-        <div className="bg-slate-950 px-4 py-2 text-xs text-slate-300">
+        <div className="bg-[#143527] px-4 py-1.5 text-xs text-[#d7e7d5]">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2">
-            <span className="font-medium text-slate-200">
+            <span className="font-medium">
               TNEA admissions guidance helpline
             </span>
             <div className="flex items-center gap-4 font-semibold">
               {contact.phone && (
-                <a href={`tel:${contact.phone}`} className="inline-flex items-center gap-1.5 hover:text-teal-300">
+                <a href={`tel:${contact.phone}`} className="inline-flex items-center gap-1.5 hover:text-white">
                   <Phone className="h-3 w-3" />
                   {contact.phone}
                 </a>
               )}
               {contact.phoneSecondary && (
-                <a href={`tel:${contact.phoneSecondary}`} className="hover:text-teal-300">
+                <a href={`tel:${contact.phoneSecondary}`} className="hover:text-white">
                   {contact.phoneSecondary}
                 </a>
               )}
@@ -89,26 +87,25 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex min-w-0 items-center gap-2">
-          <img
-            src={brand.logoSrc}
-            alt={brand.name}
-            className="h-12 w-auto max-w-[200px] object-contain object-left"
-          />
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="flex items-center gap-2 font-heading text-xl font-bold tracking-tight text-[#143527]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#143527] text-white">
+            <Sprout className="h-5 w-5" />
+          </span>
+          <span>{brand.name}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 xl:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.to === "/"}
               className={({ isActive }) =>
-                `rounded-full px-3 py-2 text-sm font-medium ${
+                `rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors ${
                   isActive
-                    ? "bg-teal-50 font-semibold text-teal-800"
-                    : "text-slate-600 hover:bg-slate-100"
+                    ? "bg-[#143527] font-semibold text-white"
+                    : "text-[#142e23] hover:bg-[#cdddc9]/60"
                 }`
               }
             >
@@ -117,33 +114,34 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="hidden items-center gap-3 md:flex">
           <LanguageSwitcher />
           {user ? (
             <div className="relative" ref={userRef}>
               <button
                 type="button"
                 onClick={() => setUserDropdown(!userDropdown)}
-                className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 p-1.5 pr-3"
+                className="flex items-center gap-2 rounded-full border border-[#cdddc9] bg-white p-1 pr-3 shadow-xs"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-700 text-white">
-                  {profile?.name ? profile.name.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#143527] text-xs text-white">
+                  {profile?.name ? profile.name.charAt(0).toUpperCase() : <User className="h-3.5 w-3.5" />}
                 </span>
-                <ChevronDown size={14} />
+                <span className="text-xs font-semibold text-[#142e23]">{profile?.name || "Account"}</span>
+                <ChevronDown size={14} className="text-[#577063]" />
               </button>
               {userDropdown && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl">
+                <div className="absolute right-0 mt-2 w-56 rounded-2xl border border-[#cdddc9] bg-white p-2 shadow-xl">
                   <Link
                     to={dashboardPath}
-                    className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-teal-50"
+                    className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-[#142e23] hover:bg-[#edf4ec]"
                   >
-                    <LayoutDashboard className="h-4 w-4" /> Dashboard
+                    <LayoutDashboard className="h-4 w-4 text-[#143527]" /> Dashboard
                   </Link>
                   <Link
                     to="/profile"
-                    className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm hover:bg-teal-50"
+                    className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-[#142e23] hover:bg-[#edf4ec]"
                   >
-                    <User className="h-4 w-4" /> My Profile
+                    <User className="h-4 w-4 text-[#143527]" /> My Profile
                   </Link>
                   <button
                     type="button"
@@ -157,14 +155,14 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-sm font-semibold text-slate-700">
-                {t.nav.signIn}
+              <Link to="/login" className="text-sm font-semibold text-[#142e23] hover:text-[#143527]">
+                Login
               </Link>
               <Link
-                to="/colleges"
-                className="rounded-full bg-teal-700 px-4 py-2 text-sm font-semibold text-white"
+                to="/register"
+                className="rounded-full bg-[#143527] px-4 py-2 text-sm font-semibold text-white shadow-xs hover:bg-[#0b2017]"
               >
-                {t.cta.findCollege}
+                Register free
               </Link>
             </>
           )}
@@ -173,7 +171,7 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setMobileMenu(!mobileMenu)}
-          className="rounded-xl border border-slate-200 p-2 lg:hidden"
+          className="rounded-xl border border-[#cdddc9] p-2 text-[#142e23] md:hidden"
           aria-label="Toggle menu"
         >
           {mobileMenu ? <X size={22} /> : <Menu size={22} />}
@@ -181,7 +179,7 @@ const Navbar = () => {
       </div>
 
       {mobileMenu && (
-        <div className="border-t bg-white px-4 py-4 lg:hidden">
+        <div className="border-t border-[#cdddc9] bg-[#dce8da] px-4 py-4 md:hidden">
           <div className="mb-3">
             <LanguageSwitcher />
           </div>
@@ -190,19 +188,24 @@ const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="rounded-xl px-3 py-2.5 text-sm font-medium text-slate-800 hover:bg-teal-50"
+                className="rounded-xl px-3 py-2.5 text-sm font-medium text-[#142e23] hover:bg-[#cdddc9]"
               >
                 {link.label}
               </Link>
             ))}
             {user ? (
-              <Link to={dashboardPath} className="rounded-xl bg-teal-50 px-3 py-2.5 text-sm font-semibold text-teal-800">
+              <Link to={dashboardPath} className="rounded-xl bg-[#143527] px-3 py-2.5 text-sm font-semibold text-white">
                 Dashboard
               </Link>
             ) : (
-              <Link to="/login" className="rounded-xl px-3 py-2.5 text-sm font-semibold">
-                {t.nav.signIn}
-              </Link>
+              <div className="mt-2 flex flex-col gap-2">
+                <Link to="/login" className="rounded-xl border border-[#143527] px-3 py-2 text-center text-sm font-semibold text-[#143527]">
+                  Login
+                </Link>
+                <Link to="/register" className="rounded-xl bg-[#143527] px-3 py-2 text-center text-sm font-semibold text-white">
+                  Register free
+                </Link>
+              </div>
             )}
           </nav>
         </div>

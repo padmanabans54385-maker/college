@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import {
+  ArrowLeft,
   BookOpen,
   Edit3,
   Plus,
   Trash2,
   X,
 } from "lucide-react";
+
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 import {
   createOnlineCourse,
@@ -163,36 +168,49 @@ const AdminOnlineCourses = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-black text-white">
-              <BookOpen size={21} />
-            </div>
+    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <Navbar />
 
-            <div>
-              <h1 className="text-2xl font-bold">
-                Online Courses
-              </h1>
-
-              <p className="text-sm text-gray-500">
-                Manage online learning content
-              </p>
-            </div>
-          </div>
-
-          <button
-            onClick={openCreate}
-            className="flex items-center gap-2 rounded-xl bg-black px-5 py-3 font-semibold text-white"
+      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+        <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
+          <Link
+            to="/admin"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
           >
-            <Plus size={18} />
-            Add Course
-          </button>
+            <ArrowLeft className="h-4 w-4" />
+            Admin Dashboard
+          </Link>
+
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white">
+                <BookOpen size={22} />
+              </div>
+
+              <div>
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
+                  Online Courses
+                </h1>
+
+                <p className="mt-1 text-sm text-[#577063]">
+                  Manage online learning content
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={openCreate}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#0b2017] transition"
+            >
+              <Plus size={18} />
+              Add Course
+            </button>
+          </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-6 py-8">
+      <main className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
         <div className="mb-8 grid gap-4 md:grid-cols-3">
           <Stat
             label="Total Courses"
@@ -496,6 +514,8 @@ const AdminOnlineCourses = () => {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 };
@@ -512,7 +532,7 @@ const Field = ({
   placeholder?: string;
 }) => (
   <div>
-    <label className="mb-2 block text-sm font-semibold">
+    <label className="mb-2 block text-sm font-semibold text-[#142e23]">
       {label}
     </label>
 
@@ -522,7 +542,7 @@ const Field = ({
         onChange(event.target.value)
       }
       placeholder={placeholder}
-      className="w-full rounded-xl border px-4 py-3 outline-none focus:border-black"
+      className="w-full rounded-2xl border border-[#cdddc9] px-4 py-3 text-sm text-[#142e23] outline-none focus:border-[#143527]"
     />
   </div>
 );
@@ -534,12 +554,12 @@ const Stat = ({
   label: string;
   value: number;
 }) => (
-  <div className="rounded-2xl border bg-white p-5">
-    <p className="text-sm text-gray-500">
+  <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
+    <p className="text-xs font-semibold uppercase tracking-wider text-[#577063]">
       {label}
     </p>
 
-    <p className="mt-2 text-3xl font-bold">
+    <p className="mt-2 font-heading text-3xl font-extrabold text-[#143527]">
       {value}
     </p>
   </div>
