@@ -221,7 +221,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center justify-center gap-2 text-xs font-poppins text-[#D2E3EA]">
             <CheckCircle2 className="h-4 w-4 text-[#4DB3E8]" />
-            <span>500+ Top Accredited Institutions</span>
+            <span>1000+ Top Accredited Institutions</span>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs font-poppins text-[#D2E3EA]">
             <CheckCircle2 className="h-4 w-4 text-[#4DB3E8]" />
