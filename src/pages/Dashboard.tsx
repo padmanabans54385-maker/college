@@ -221,33 +221,33 @@ const Dashboard = () => {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-[#edf4ec]">
+      <main className="min-h-screen bg-[#F5F9FC]">
         {/* Header */}
-        <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-10">
+        <section className="border-b border-[#E2ECF3]/60 bg-[#E8F4FA] py-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-wrap gap-2 text-sm">
-              <Link to="/my-colleges" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">My colleges</Link>
-              <Link to="/my-choice-list" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Choice lists</Link>
-              <Link to="/my-comparisons" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Comparisons</Link>
-              <Link to="/counselling-request" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Counselling</Link>
-              <Link to="/profile" className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 font-bold text-[#143527] transition hover:bg-white">Profile</Link>
+              <Link to="/my-colleges" className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 font-bold text-[#075B63] transition hover:bg-white">My colleges</Link>
+              <Link to="/my-choice-list" className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 font-bold text-[#075B63] transition hover:bg-white">Choice lists</Link>
+              <Link to="/my-comparisons" className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 font-bold text-[#075B63] transition hover:bg-white">Comparisons</Link>
+              <Link to="/counselling-request" className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 font-bold text-[#075B63] transition hover:bg-white">Counselling</Link>
+              <Link to="/profile" className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 font-bold text-[#075B63] transition hover:bg-white">Profile</Link>
             </div>
             <div className="mt-8 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#143527]">
-                  <Sparkles className="h-4 w-4 text-[#143527]" />
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#075B63]">
+                  <Sparkles className="h-4 w-4 text-[#075B63]" />
                   Student Portal
                 </div>
 
-                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#142e23] md:text-4xl">
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63] md:text-4xl">
                   Welcome back,{" "}
-                  <span className="font-serif-italic font-normal italic text-[#143527]">
+                  <span className="font-serif-italic font-normal italic text-[#075B63]">
                     {profile?.name?.split(" ")[0] || "Student"}
                   </span>
                   !
                 </h1>
 
-                <p className="mt-2 max-w-2xl text-base text-[#465f51]">
+                <p className="mt-2 max-w-2xl text-base text-[#5A6E78]">
                   Track your college applications, cutoff predictions, and admission status.
                 </p>
               </div>
@@ -255,7 +255,7 @@ const Dashboard = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to="/colleges"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0b2017]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#05434A]"
                 >
                   <Search className="h-4 w-4" />
                   Find Colleges
@@ -263,7 +263,7 @@ const Dashboard = () => {
 
                 <Link
                   to="/scholarships"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-6 py-3 text-sm font-semibold text-[#143527] transition hover:bg-[#143527]/10"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#075B63] bg-transparent px-6 py-3 text-sm font-semibold text-[#075B63] transition hover:bg-[#075B63]/10"
                 >
                   Scholarships
                 </Link>

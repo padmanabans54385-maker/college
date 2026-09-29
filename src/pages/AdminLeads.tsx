@@ -16,28 +16,28 @@ const AdminLeads = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
-      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+      <header className="border-b border-[#E2ECF3] bg-[#E8F4FA]">
         <div className="mx-auto max-w-6xl px-5 py-8 sm:px-6 lg:px-8">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
           >
             <ArrowLeft className="h-4 w-4" />
             Admin Dashboard
           </Link>
 
           <div className="mt-4 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#075B63] text-white">
               <Users size={22} />
             </div>
             <div>
-              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
+              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63]">
                 Admission Leads
               </h1>
-              <p className="mt-1 text-sm text-[#577063]">
+              <p className="mt-1 text-sm text-[#5A6E78]">
                 Track WhatsApp, enquiry form, and counselling leads.
               </p>
             </div>
@@ -46,30 +46,30 @@ const AdminLeads = () => {
       </header>
 
       <main className="mx-auto max-w-6xl px-5 py-10 sm:px-6 lg:px-8">
-        <div className="overflow-hidden rounded-3xl border border-[#cdddc9] bg-white shadow-xs">
+        <div className="overflow-hidden rounded-3xl border border-[#E2ECF3] bg-white shadow-xs">
           <div className="overflow-x-auto">
             <table className="min-w-[800px] w-full text-sm">
               <thead>
-                <tr className="border-b border-[#cdddc9] bg-[#e6f0e4] text-left font-heading text-[#143527]">
+                <tr className="border-b border-[#E2ECF3] bg-[#F0F8FD] text-left font-heading text-[#075B63]">
                   {["Name", "Phone", "Source", "Status"].map((h) => (
                     <th key={h} className="p-4 font-semibold">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#cdddc9]/60">
+              <tbody className="divide-y divide-[#E2ECF3]/60">
                 {items.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="p-8 text-center text-[#577063]">
+                    <td colSpan={4} className="p-8 text-center text-[#5A6E78]">
                       No leads received yet.
                     </td>
                   </tr>
                 ) : (
                   items.map((item) => (
-                    <tr key={item.id} className="hover:bg-[#edf4ec]/50 transition">
-                      <td className="p-4 font-medium text-[#142e23]">{item.name}</td>
-                      <td className="p-4 text-[#577063]">{item.phone}</td>
+                    <tr key={item.id} className="hover:bg-[#F5F9FC]/50 transition">
+                      <td className="p-4 font-medium text-[#075B63]">{item.name}</td>
+                      <td className="p-4 text-[#5A6E78]">{item.phone}</td>
                       <td className="p-4">
-                        <span className="rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1 text-xs font-medium text-[#143527]">
+                        <span className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3 py-1 text-xs font-medium text-[#075B63]">
                           {item.source}
                         </span>
                       </td>
@@ -83,7 +83,7 @@ const AdminLeads = () => {
                               current.map((row) => (row.id === item.id ? { ...row, status } : row))
                             );
                           }}
-                          className="rounded-xl border border-[#cdddc9] bg-white px-3 py-1.5 text-xs font-semibold text-[#143527] outline-none focus:border-[#143527]"
+                          className="rounded-xl border border-[#E2ECF3] bg-white px-3 py-1.5 text-xs font-semibold text-[#075B63] outline-none focus:border-[#075B63]"
                         >
                           {statuses.map((status) => (
                             <option key={status} value={status}>

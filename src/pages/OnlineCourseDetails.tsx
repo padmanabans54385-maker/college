@@ -121,17 +121,17 @@ const OnlineCourseDetails = () => {
 
   if (!course) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
 
         <main className="flex min-h-[70vh] flex-col items-center justify-center px-5 text-center">
-          <h1 className="font-heading text-3xl font-bold text-[#143527]">
+          <h1 className="font-heading text-3xl font-bold text-[#075B63]">
             Course not found
           </h1>
 
           <Link
             to="/online-courses"
-            className="mt-6 rounded-full bg-[#143527] px-8 py-3 text-sm font-semibold text-white hover:bg-[#0b2017] transition"
+            className="mt-6 rounded-full bg-[#075B63] px-8 py-3 text-sm font-semibold text-white hover:bg-[#05434A] transition"
           >
             Browse Courses
           </Link>
@@ -143,30 +143,30 @@ const OnlineCourseDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
-      <section className="border-b border-[#cdddc9] bg-[#dce8da] py-12">
+      <section className="border-b border-[#E2ECF3] bg-[#E8F4FA] py-12">
         <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           <Link
             to="/online-courses"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
           >
             <ArrowLeft size={17} />
             Back to Online Courses
           </Link>
 
           <div className="mt-8 max-w-4xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-semibold text-[#075B63]">
               <GraduationCap size={16} />
               {course.category}
             </div>
 
-            <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527] sm:text-4xl md:text-5xl">
+            <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63] sm:text-4xl md:text-5xl">
               {course.title}
             </h1>
 
-            <p className="mt-4 text-base leading-relaxed text-[#577063]">
+            <p className="mt-4 text-base leading-relaxed text-[#5A6E78]">
               {course.description}
             </p>
           </div>
@@ -321,16 +321,16 @@ const InfoCard = ({
   label: string;
   value: string;
 }) => (
-  <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
-    <div className="w-fit rounded-2xl bg-[#e6f0e4] p-3 text-[#143527]">
+  <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-xs">
+    <div className="w-fit rounded-2xl bg-[#F0F8FD] p-3 text-[#075B63]">
       {icon}
     </div>
 
-    <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#577063]">
+    <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#5A6E78]">
       {label}
     </p>
 
-    <p className="mt-1 font-heading text-lg font-bold text-[#143527] capitalize">
+    <p className="mt-1 font-heading text-lg font-bold text-[#075B63] capitalize">
       {value || "Not specified"}
     </p>
   </div>

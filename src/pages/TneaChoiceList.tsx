@@ -83,20 +83,20 @@ const TneaChoiceList = () => {
   };
 
   const renderBucket = (title: string, items: ChoiceListItem[]) => (
-    <section className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-sm">
-      <div className="flex items-center justify-between border-b border-[#cdddc9] pb-3">
-        <h2 className="font-heading text-lg font-bold text-[#142e23]">{title}</h2>
-        <span className="rounded-full bg-[#e6f0e4] px-2.5 py-0.5 text-xs font-bold text-[#143527]">
+    <section className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-sm">
+      <div className="flex items-center justify-between border-b border-[#E2ECF3] pb-3">
+        <h2 className="font-heading text-lg font-bold text-[#075B63]">{title}</h2>
+        <span className="rounded-full bg-[#F0F8FD] px-2.5 py-0.5 text-xs font-bold text-[#075B63]">
           {items.length} choices
         </span>
       </div>
       <ul className="mt-4 space-y-4">
         {items.map((item, index) => (
-          <li key={`${title}-${index}`} className="border-b border-[#cdddc9]/60 pb-3 text-sm last:border-0 last:pb-0">
-            <p className="font-heading font-bold text-[#143527]">{item.collegeName} — {item.branch}</p>
-            <p className="text-xs text-[#577063] mt-0.5">{item.location}</p>
-            <p className="mt-1 text-xs">Historical cutoff: <span className="font-bold text-[#142e23]">{item.historicalCutoff ?? "N/A"}</span></p>
-            <p className="text-xs text-[#465f51] mt-1">{item.reason}</p>
+          <li key={`${title}-${index}`} className="border-b border-[#E2ECF3]/60 pb-3 text-sm last:border-0 last:pb-0">
+            <p className="font-heading font-bold text-[#075B63]">{item.collegeName} — {item.branch}</p>
+            <p className="text-xs text-[#5A6E78] mt-0.5">{item.location}</p>
+            <p className="mt-1 text-xs">Historical cutoff: <span className="font-bold text-[#075B63]">{item.historicalCutoff ?? "N/A"}</span></p>
+            <p className="text-xs text-[#5A6E78] mt-1">{item.reason}</p>
           </li>
         ))}
       </ul>
@@ -104,21 +104,21 @@ const TneaChoiceList = () => {
   );
 
   const inputClass =
-    "w-full rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/40 px-4 py-2.5 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20";
+    "w-full rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/40 px-4 py-2.5 text-sm text-[#075B63] outline-none transition focus:border-[#075B63] focus:bg-white focus:ring-2 focus:ring-[#075B63]/20";
 
   return (
-    <main className="bg-[#edf4ec] py-12">
+    <main className="bg-[#F5F9FC] py-12">
       <Seo title="Personalized TNEA Choice List" description="Generate a dream, target and safe college choice list from historical data." path="/tnea/choice-list" />
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#143527]">
-          <ListOrdered className="h-3.5 w-3.5 text-[#143527]" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#075B63]">
+          <ListOrdered className="h-3.5 w-3.5 text-[#075B63]" />
           Smart Choice Builder
         </div>
 
-        <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#142e23] sm:text-5xl">
-          Personalized <span className="font-serif-italic font-normal italic text-[#143527]">choice list</span>
+        <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#075B63] sm:text-5xl">
+          Personalized <span className="font-serif-italic font-normal italic text-[#075B63]">choice list</span>
         </h1>
-        <p className="mt-2 text-base text-[#577063]">
+        <p className="mt-2 text-base text-[#5A6E78]">
           Generate a balanced preference order of engineering colleges across Dream, Target, and Safe categories.
         </p>
 
@@ -126,7 +126,7 @@ const TneaChoiceList = () => {
           <Disclaimer kind="prediction" />
         </div>
 
-        <form onSubmit={onSubmit} className="mt-8 grid gap-4 rounded-3xl border border-[#cdddc9] bg-white p-6 sm:p-8 shadow-md sm:grid-cols-2">
+        <form onSubmit={onSubmit} className="mt-8 grid gap-4 rounded-3xl border border-[#E2ECF3] bg-white p-6 sm:p-8 shadow-md sm:grid-cols-2">
           <input required name="studentName" placeholder="Student full name" className={inputClass} />
           <input name="phone" placeholder="Phone number" className={inputClass} />
           <input name="rank" placeholder="TNEA rank (optional)" className={inputClass} />
@@ -143,7 +143,7 @@ const TneaChoiceList = () => {
           </select>
 
           <div className="sm:col-span-2 mt-2">
-            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#143527] py-3.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#0b2017]">
+            <button className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#075B63] py-3.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#05434A]">
               <Sparkles size={16} /> Generate My Choice List
             </button>
           </div>
@@ -167,21 +167,21 @@ const TneaChoiceList = () => {
               <button
                 type="button"
                 onClick={onSave}
-                className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
+                className="inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 text-sm font-semibold text-white shadow-xs transition hover:bg-[#05434A]"
               >
                 <Save size={16} /> Save Choice List
               </button>
               <button
                 type="button"
                 onClick={printList}
-                className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-white px-5 py-3 text-sm font-semibold text-[#142e23] transition hover:bg-[#e6f0e4]"
+                className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-white px-5 py-3 text-sm font-semibold text-[#075B63] transition hover:bg-[#F0F8FD]"
               >
                 <Printer size={16} /> Export PDF / Print
               </button>
               <button
                 type="button"
                 onClick={share}
-                className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-white px-5 py-3 text-sm font-semibold text-[#142e23] transition hover:bg-[#e6f0e4]"
+                className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-white px-5 py-3 text-sm font-semibold text-[#075B63] transition hover:bg-[#F0F8FD]"
               >
                 <Share2 size={16} /> Share
               </button>
@@ -190,7 +190,7 @@ const TneaChoiceList = () => {
               </WhatsAppButton>
             </div>
 
-            {message && <p className="mt-4 text-sm font-semibold text-emerald-800">{message}</p>}
+            {message && <p className="mt-4 text-sm font-semibold text-[#075B63]">{message}</p>}
           </>
         )}
       </div>

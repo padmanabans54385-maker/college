@@ -30,21 +30,21 @@ const TneaCutoff = () => {
 
   const mark = Number(academic);
   const inputClass =
-    "w-full rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/40 px-4 py-2.5 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20";
+    "w-full rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/40 px-4 py-2.5 text-sm text-[#075B63] outline-none transition focus:border-[#075B63] focus:bg-white focus:ring-2 focus:ring-[#075B63]/20";
 
   return (
-    <main className="bg-[#edf4ec] py-12">
+    <main className="bg-[#F5F9FC] py-12">
       <Seo title="TNEA Cutoff Explorer" description="Explore historical TNEA cut-offs by community, branch and district." path="/tnea/cutoff" />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#143527]">
-          <Compass className="h-3.5 w-3.5 text-[#143527]" />
+        <div className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#075B63]">
+          <Compass className="h-3.5 w-3.5 text-[#075B63]" />
           Cutoff Analytics
         </div>
 
-        <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#142e23] sm:text-5xl">
-          TNEA cutoff <span className="font-serif-italic font-normal italic text-[#143527]">explorer</span>
+        <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#075B63] sm:text-5xl">
+          TNEA cutoff <span className="font-serif-italic font-normal italic text-[#075B63]">explorer</span>
         </h1>
-        <p className="mt-2 text-base text-[#577063]">
+        <p className="mt-2 text-base text-[#5A6E78]">
           Historical cutoff records for engineering colleges across Tamil Nadu communities and branches.
         </p>
 
@@ -52,7 +52,7 @@ const TneaCutoff = () => {
           <Disclaimer kind="prediction" />
         </div>
 
-        <form onSubmit={onSubmit} className="mt-8 grid gap-3 rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-md sm:grid-cols-3">
+        <form onSubmit={onSubmit} className="mt-8 grid gap-3 rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-md sm:grid-cols-3">
           <input name="year" placeholder="Year (e.g. 2025)" className={inputClass} />
           <input name="community" placeholder="Community (OC / BC / BCM / MBC / SC / ST)" className={inputClass} />
           <input
@@ -64,7 +64,7 @@ const TneaCutoff = () => {
           />
           <input name="branch" placeholder="Branch (CSE / ECE / Mech...)" className={inputClass} />
           <input name="district" placeholder="District (Chennai / Coimb...)" className={inputClass} />
-          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]">
+          <button className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#05434A]">
             <Search size={16} /> Search Cutoffs
           </button>
         </form>
@@ -79,25 +79,25 @@ const TneaCutoff = () => {
           </div>
         )}
         {rows && rows.length > 0 && (
-          <div className="mt-8 overflow-x-auto rounded-3xl border border-[#cdddc9] bg-white shadow-md">
+          <div className="mt-8 overflow-x-auto rounded-3xl border border-[#E2ECF3] bg-white shadow-md">
             <table className="min-w-[800px] w-full text-sm">
               <thead>
-                <tr className="border-b border-[#cdddc9] bg-[#dce8da] text-left font-heading font-bold text-[#142e23]">
+                <tr className="border-b border-[#E2ECF3] bg-[#E8F4FA] text-left font-heading font-bold text-[#075B63]">
                   {["College", "Branch", "Previous cutoff", "Category", "Location", "Admission likelihood"].map((h) => (
                     <th key={h} className="p-4">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#cdddc9]/60 text-[#142e23]">
+              <tbody className="divide-y divide-[#E2ECF3]/60 text-[#075B63]">
                 {rows.map((row) => {
                   const likelihood: Likelihood | null = Number.isFinite(mark) && mark > 0
                     ? getAdmissionLikelihood(mark, row.cutoff)
                     : null;
                   return (
-                    <tr key={row.id} className="transition hover:bg-[#e6f0e4]/40">
-                      <td className="p-4 font-semibold text-[#143527]">{row.collegeName || row.collegeId}</td>
+                    <tr key={row.id} className="transition hover:bg-[#F0F8FD]/40">
+                      <td className="p-4 font-semibold text-[#075B63]">{row.collegeName || row.collegeId}</td>
                       <td className="p-4 font-medium">{row.branch}</td>
-                      <td className="p-4 font-bold text-[#143527]">{row.cutoff}</td>
+                      <td className="p-4 font-bold text-[#075B63]">{row.cutoff}</td>
                       <td className="p-4">{row.community}</td>
                       <td className="p-4">{row.district || "—"}</td>
                       <td className="p-4">
@@ -107,7 +107,7 @@ const TneaCutoff = () => {
                             {likelihoodLabel(likelihood)}
                           </span>
                         ) : (
-                          <span className="text-xs text-[#577063]">Enter your cutoff above</span>
+                          <span className="text-xs text-[#5A6E78]">Enter your cutoff above</span>
                         )}
                       </td>
                     </tr>

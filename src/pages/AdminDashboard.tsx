@@ -61,24 +61,24 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
       <main>
-        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-12">
+        <section className="border-b border-[#E2ECF3] bg-[#E8F4FA] py-12">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
-                  <GraduationCap className="h-4 w-4 text-[#143527]" />
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-semibold text-[#075B63]">
+                  <GraduationCap className="h-4 w-4 text-[#075B63]" />
                   Admin Portal
                 </div>
 
-                <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-[#143527]">
+                <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-[#075B63]">
                   Platform Overview
                 </h1>
 
-                <p className="mt-2 text-[#577063]">
+                <p className="mt-2 text-[#5A6E78]">
                   Manage the Go2College admission platform.
                 </p>
               </div>
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={() => logoutUser()}
-                className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-5 py-2.5 text-sm font-semibold text-[#143527] transition hover:bg-[#143527] hover:text-white"
+                className="inline-flex items-center gap-2 rounded-full border border-[#075B63] bg-transparent px-5 py-2.5 text-sm font-semibold text-[#075B63] transition hover:bg-[#075B63] hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
                 Logout
@@ -196,16 +196,16 @@ const AdminStat = ({
   value: number;
   loading: boolean;
 }) => (
-  <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
-    <div className="w-fit rounded-2xl bg-[#e6f0e4] p-3 text-[#143527]">
+  <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-xs">
+    <div className="w-fit rounded-2xl bg-[#F0F8FD] p-3 text-[#075B63]">
       {icon}
     </div>
 
-    <p className="mt-6 font-heading text-3xl font-extrabold text-[#143527]">
+    <p className="mt-6 font-heading text-3xl font-extrabold text-[#075B63]">
       {loading ? "—" : value}
     </p>
 
-    <p className="mt-1 text-sm font-medium text-[#577063]">
+    <p className="mt-1 text-sm font-medium text-[#5A6E78]">
       {label}
     </p>
   </div>
@@ -224,17 +224,17 @@ const AdminMenu = ({
 }) => (
   <Link
     to={link ?? "/admin"}
-    className="block rounded-3xl border border-[#cdddc9] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#143527] hover:shadow-lg hover:shadow-[#143527]/5"
+    className="block rounded-3xl border border-[#E2ECF3] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#075B63] hover:shadow-lg hover:shadow-[#075B63]/5"
   >
-    <div className="w-fit rounded-2xl bg-[#e6f0e4] p-3 text-[#143527]">
+    <div className="w-fit rounded-2xl bg-[#F0F8FD] p-3 text-[#075B63]">
       {icon}
     </div>
 
-    <h2 className="mt-5 font-heading text-xl font-bold text-[#143527]">
+    <h2 className="mt-5 font-heading text-xl font-bold text-[#075B63]">
       {title}
     </h2>
 
-    <p className="mt-2 text-sm leading-6 text-[#577063]">
+    <p className="mt-2 text-sm leading-6 text-[#5A6E78]">
       {description}
     </p>
   </Link>

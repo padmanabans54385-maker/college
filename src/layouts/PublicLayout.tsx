@@ -5,7 +5,7 @@ import { WhatsAppFab } from "../components/WhatsAppButton";
 import { PageTransition } from "../components/PageTransition";
 
 const PublicLayout = () => (
-  <div className="min-h-screen bg-[#edf4ec]">
+  <div className="min-h-screen bg-[#F5F9FC]">
     <Navbar />
     <PageTransition><Outlet /></PageTransition>
     <Footer />

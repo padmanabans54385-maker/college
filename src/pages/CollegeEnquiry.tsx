@@ -113,14 +113,14 @@ const CollegeEnquiry = () => {
   };
 
   const inputClass =
-    "mt-2 h-13 w-full rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/40 px-4 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20";
+    "mt-2 h-13 w-full rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/40 px-4 text-sm text-[#075B63] outline-none transition focus:border-[#075B63] focus:bg-white focus:ring-2 focus:ring-[#075B63]/20";
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#edf4ec]">
+      <div className="min-h-screen bg-[#F5F9FC]">
         <Navbar />
         <div className="mx-auto max-w-5xl px-5 py-20">
-          <div className="h-[600px] animate-pulse rounded-3xl bg-[#dce8da]" />
+          <div className="h-[600px] animate-pulse rounded-3xl bg-[#E8F4FA]" />
         </div>
         <Footer />
       </div>
@@ -129,15 +129,15 @@ const CollegeEnquiry = () => {
 
   if (!college) {
     return (
-      <div className="min-h-screen bg-[#edf4ec]">
+      <div className="min-h-screen bg-[#F5F9FC]">
         <Navbar />
         <main className="flex min-h-[70vh] items-center justify-center px-5">
           <div className="text-center">
-            <GraduationCap className="mx-auto h-14 w-14 text-[#577063]" />
-            <h1 className="mt-5 font-heading text-3xl font-bold text-[#142e23]">College not found</h1>
+            <GraduationCap className="mx-auto h-14 w-14 text-[#5A6E78]" />
+            <h1 className="mt-5 font-heading text-3xl font-bold text-[#075B63]">College not found</h1>
             <Link
               to="/colleges"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#0b2017]"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#05434A]"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Colleges
@@ -151,27 +151,27 @@ const CollegeEnquiry = () => {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-[#edf4ec]">
+      <div className="min-h-screen bg-[#F5F9FC]">
         <Navbar />
         <main className="flex min-h-[75vh] items-center justify-center px-5">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-xl rounded-3xl border border-[#cdddc9] bg-white p-8 text-center shadow-xl sm:p-12"
+            className="w-full max-w-xl rounded-3xl border border-[#E2ECF3] bg-white p-8 text-center shadow-xl sm:p-12"
           >
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#e6f0e4] text-[#143527]">
-              <CheckCircle2 className="h-10 w-10 text-[#143527]" />
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#F0F8FD] text-[#075B63]">
+              <CheckCircle2 className="h-10 w-10 text-[#075B63]" />
             </div>
 
-            <h1 className="mt-7 font-heading text-3xl font-extrabold tracking-tight text-[#142e23]">
+            <h1 className="mt-7 font-heading text-3xl font-extrabold tracking-tight text-[#075B63]">
               Enquiry Sent Successfully
             </h1>
 
-            <p className="mt-4 text-base leading-relaxed text-[#577063]">
+            <p className="mt-4 text-base leading-relaxed text-[#5A6E78]">
               Your admission enquiry has been submitted to <strong>{college.name}</strong>.
             </p>
 
-            <p className="mt-2 text-sm text-[#577063]">
+            <p className="mt-2 text-sm text-[#5A6E78]">
               Our counselling team and the college admission office will contact you shortly.
             </p>
 
@@ -179,7 +179,7 @@ const CollegeEnquiry = () => {
               {user && (
                 <Link
                   to="/dashboard"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-6 py-3.5 font-semibold text-white shadow-md hover:bg-[#0b2017]"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-6 py-3.5 font-semibold text-white shadow-md hover:bg-[#05434A]"
                 >
                   View Dashboard
                   <ArrowRight className="h-4 w-4" />
@@ -188,7 +188,7 @@ const CollegeEnquiry = () => {
 
               <Link
                 to={`/colleges/${college.id}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#cdddc9] bg-[#edf4ec] px-6 py-3.5 font-semibold text-[#142e23] hover:bg-[#dce8da]"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F5F9FC] px-6 py-3.5 font-semibold text-[#075B63] hover:bg-[#E8F4FA]"
               >
                 Back to College
               </Link>
@@ -201,34 +201,34 @@ const CollegeEnquiry = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf4ec]">
+    <div className="min-h-screen bg-[#F5F9FC]">
       <Seo title={`Admission Enquiry - ${college.name}`} description={`Submit an admission enquiry for ${college.name}.`} path={`/colleges/${college.id}/enquiry`} />
       <Navbar />
 
       <main>
         {/* Header */}
-        <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-12 text-[#142e23]">
+        <section className="border-b border-[#E2ECF3]/60 bg-[#E8F4FA] py-12 text-[#075B63]">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link
               to={`/colleges/${college.id}`}
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#075B63] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to College Profile
             </Link>
 
             <div className="mt-6 max-w-3xl">
-              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#143527]">
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#075B63]">
                 <GraduationCap className="h-4 w-4" />
                 Admission Enquiry
               </div>
 
-              <h1 className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl text-[#142e23]">
+              <h1 className="font-heading text-4xl font-extrabold tracking-tight sm:text-5xl text-[#075B63]">
                 Start your journey with <br className="hidden sm:inline" />
-                <span className="font-serif-italic font-normal italic text-[#143527]">{college.name}</span>
+                <span className="font-serif-italic font-normal italic text-[#075B63]">{college.name}</span>
               </h1>
 
-              <p className="mt-4 text-base leading-relaxed text-[#465f51]">
+              <p className="mt-4 text-base leading-relaxed text-[#5A6E78]">
                 Fill in your details below to submit an enquiry for courses, fees, cutoff marks, and direct admission guidance.
               </p>
             </div>
@@ -242,13 +242,13 @@ const CollegeEnquiry = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-md sm:p-9"
+              className="rounded-3xl border border-[#E2ECF3] bg-white p-7 shadow-md sm:p-9"
             >
-              <h2 className="font-heading text-2xl font-bold text-[#142e23]">
+              <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                 Your Applicant Information
               </h2>
 
-              <p className="mt-2 text-sm text-[#577063]">
+              <p className="mt-2 text-sm text-[#5A6E78]">
                 Please provide accurate details so counsellors can get back to you with the correct course guidance.
               </p>
 
@@ -261,7 +261,7 @@ const CollegeEnquiry = () => {
               <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-[#142e23]">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#075B63]">
                       Full Name *
                     </label>
                     <input
@@ -273,7 +273,7 @@ const CollegeEnquiry = () => {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-[#142e23]">
+                    <label className="text-xs font-bold uppercase tracking-wider text-[#075B63]">
                       Phone Number *
                     </label>
                     <input
@@ -287,7 +287,7 @@ const CollegeEnquiry = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#142e23]">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#075B63]">
                     Email Address *
                   </label>
                   <input
@@ -300,7 +300,7 @@ const CollegeEnquiry = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#142e23]">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#075B63]">
                     Interested Course / Branch
                   </label>
                   <select
@@ -318,7 +318,7 @@ const CollegeEnquiry = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#142e23]">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#075B63]">
                     Message / Special Requirements
                   </label>
                   <textarea
@@ -326,14 +326,14 @@ const CollegeEnquiry = () => {
                     onChange={(e) => handleChange("message", e.target.value)}
                     placeholder="Ask about cutoff requirements, hostel, or fee structures..."
                     rows={5}
-                    className="mt-2 w-full resize-none rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/40 px-4 py-3 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20"
+                    className="mt-2 w-full resize-none rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/40 px-4 py-3 text-sm text-[#075B63] outline-none transition focus:border-[#075B63] focus:bg-white focus:ring-2 focus:ring-[#075B63]/20"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[#143527] font-semibold text-white shadow-md transition hover:bg-[#0b2017] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[#075B63] font-semibold text-white shadow-md transition hover:bg-[#05434A] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {submitting ? (
                     <>
@@ -352,8 +352,8 @@ const CollegeEnquiry = () => {
 
             {/* College info card */}
             <aside>
-              <div className="sticky top-28 overflow-hidden rounded-3xl border border-[#cdddc9] bg-white shadow-md">
-                <div className="flex h-48 items-center justify-center bg-[#dce8da]">
+              <div className="sticky top-28 overflow-hidden rounded-3xl border border-[#E2ECF3] bg-white shadow-md">
+                <div className="flex h-48 items-center justify-center bg-[#E8F4FA]">
                   {college.logo ? (
                     <img
                       src={college.logo}
@@ -361,24 +361,24 @@ const CollegeEnquiry = () => {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <GraduationCap className="h-20 w-20 text-[#143527]/40" />
+                    <GraduationCap className="h-20 w-20 text-[#075B63]/40" />
                   )}
                 </div>
 
                 <div className="p-7">
                   {college.verified && (
-                    <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1.5 text-xs font-bold text-[#143527]">
+                    <div className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3 py-1.5 text-xs font-bold text-[#075B63]">
                       <BadgeCheck className="h-4 w-4" />
                       Verified Institution
                     </div>
                   )}
 
-                  <h2 className="font-heading text-2xl font-bold text-[#142e23]">
+                  <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                     {college.name}
                   </h2>
 
-                  <div className="mt-4 flex gap-3 text-sm text-[#577063]">
-                    <MapPin className="h-5 w-5 shrink-0 text-[#143527]" />
+                  <div className="mt-4 flex gap-3 text-sm text-[#5A6E78]">
+                    <MapPin className="h-5 w-5 shrink-0 text-[#075B63]" />
                     <span>
                       {college.location}, {college.district},{" "}
                       {college.state}
@@ -386,25 +386,25 @@ const CollegeEnquiry = () => {
                   </div>
 
                   {college.phone && (
-                    <div className="mt-4 flex gap-3 text-sm text-[#577063]">
-                      <Phone className="h-5 w-5 shrink-0 text-[#143527]" />
+                    <div className="mt-4 flex gap-3 text-sm text-[#5A6E78]">
+                      <Phone className="h-5 w-5 shrink-0 text-[#075B63]" />
                       {college.phone}
                     </div>
                   )}
 
                   {college.email && (
-                    <div className="mt-4 flex gap-3 text-sm text-[#577063]">
-                      <Mail className="h-5 w-5 shrink-0 text-[#143527]" />
+                    <div className="mt-4 flex gap-3 text-sm text-[#5A6E78]">
+                      <Mail className="h-5 w-5 shrink-0 text-[#075B63]" />
                       <span className="break-all">{college.email}</span>
                     </div>
                   )}
 
-                  <div className="mt-7 border-t border-[#cdddc9]/60 pt-6">
-                    <p className="text-sm font-bold text-[#142e23]">
-                      Why enquire through CollegeCrop?
+                  <div className="mt-7 border-t border-[#E2ECF3]/60 pt-6">
+                    <p className="text-sm font-bold text-[#075B63]">
+                      Why enquire through Go2College?
                     </p>
 
-                    <ul className="mt-3 space-y-2 text-sm text-[#465f51]">
+                    <ul className="mt-3 space-y-2 text-sm text-[#5A6E78]">
                       <li className="flex items-center gap-2">✓ Verified admission information</li>
                       <li className="flex items-center gap-2">✓ Updated course fee breakdowns</li>
                       <li className="flex items-center gap-2">✓ Historical cutoff insights</li>

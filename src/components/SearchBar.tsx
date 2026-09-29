@@ -52,36 +52,36 @@ export const SearchBar = ({
           event.preventDefault();
           goSearch();
         }}
-        className={`flex items-center gap-3 rounded-2xl border border-[#cdddc9] bg-white shadow-sm transition focus-within:border-[#143527] focus-within:ring-2 focus-within:ring-[#143527]/15 ${
+        className={`flex items-center gap-3 rounded-2xl border border-[#E2ECF3] bg-white shadow-sm transition focus-within:border-[#075B63] focus-within:ring-2 focus-within:ring-[#075B63]/15 ${
           size === "lg" ? "px-5 py-4" : "px-4 py-3"
         }`}
       >
-        <Search className="h-5 w-5 text-[#577063]" aria-hidden />
+        <Search className="h-5 w-5 text-[#5A6E78]" aria-hidden />
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
-          className="w-full bg-transparent text-sm text-[#142e23] placeholder-[#577063]/70 outline-none"
+          className="w-full bg-transparent text-sm text-[#075B63] placeholder-[#5A6E78]/70 outline-none"
           aria-label={placeholder}
         />
         <button
           type="submit"
-          className="rounded-full bg-[#143527] px-5 py-2 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
+          className="rounded-full bg-[#075B63] px-5 py-2 text-sm font-semibold text-white shadow-xs transition hover:bg-[#05434A]"
         >
           Search
         </button>
       </form>
       {open && hits.length > 0 && (
-        <ul className="absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[#cdddc9] bg-white shadow-xl">
+        <ul className="absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border border-[#E2ECF3] bg-white shadow-xl">
           {hits.map((hit) => (
             <li key={`${hit.type}-${hit.id}`}>
               <button
                 type="button"
                 onClick={() => goSearch(hit.href)}
-                className="flex w-full flex-col items-start px-4 py-3 text-left transition hover:bg-[#e6f0e4]"
+                className="flex w-full flex-col items-start px-4 py-3 text-left transition hover:bg-[#F0F8FD]"
               >
-                <span className="text-sm font-semibold text-[#142e23]">{hit.title}</span>
-                <span className="text-xs font-medium text-[#577063]">
+                <span className="text-sm font-semibold text-[#075B63]">{hit.title}</span>
+                <span className="text-xs font-medium text-[#5A6E78]">
                   {hit.type} {hit.subtitle ? `· ${hit.subtitle}` : ""}
                 </span>
               </button>

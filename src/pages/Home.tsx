@@ -13,7 +13,7 @@ import { ScrollReveal } from "../components/ScrollReveal";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#edf4ec]">
+    <div className="min-h-screen bg-[#F5F9FC]">
       <Seo
         title={brand.heroHeadline}
         description={brand.heroSubheadline}

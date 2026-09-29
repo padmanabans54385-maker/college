@@ -120,30 +120,30 @@ const CollegeProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
-      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+      <header className="border-b border-[#E2ECF3] bg-[#E8F4FA]">
         <div className="mx-auto max-w-5xl px-5 py-8 sm:px-6 lg:px-8">
           <Link
             to="/college"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
           >
             <ArrowLeft className="h-4 w-4" />
             College Dashboard
           </Link>
 
           <div className="mt-4 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#075B63] text-white">
               <Building2 size={22} />
             </div>
 
             <div>
-              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
+              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63]">
                 College Profile
               </h1>
 
-              <p className="mt-1 text-sm text-[#577063]">
+              <p className="mt-1 text-sm text-[#5A6E78]">
                 Manage the information students see.
               </p>
             </div>

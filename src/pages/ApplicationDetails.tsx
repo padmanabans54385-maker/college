@@ -88,10 +88,10 @@ const ApplicationDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
         <div className="flex min-h-[70vh] items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-[#143527]" />
+          <Loader2 className="h-8 w-8 animate-spin text-[#075B63]" />
         </div>
         <Footer />
       </div>
@@ -100,18 +100,18 @@ const ApplicationDetails = () => {
 
   if (error || !application) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
         <div className="flex min-h-[70vh] flex-col items-center justify-center gap-4 px-5 text-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
             <XCircle className="h-8 w-8 text-red-500" />
           </div>
-          <h1 className="font-heading text-2xl font-bold text-[#143527]">
+          <h1 className="font-heading text-2xl font-bold text-[#075B63]">
             {error || "Application not found"}
           </h1>
           <Link
             to="/dashboard"
-            className="mt-2 inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#0b2017]"
+            className="mt-2 inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#05434A]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
@@ -125,21 +125,21 @@ const ApplicationDetails = () => {
   const status = statusConfig[application.status];
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
       <main className="px-5 py-10 lg:px-8">
         <div className="mx-auto max-w-4xl">
           {/* Back */}
           <Link
             to="/dashboard"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#577063] transition hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#5A6E78] transition hover:text-[#075B63]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
           </Link>
 
           {/* Header */}
-          <div className="mt-6 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
+          <div className="mt-6 rounded-3xl border border-[#E2ECF3] bg-white p-7 shadow-xs">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -258,7 +258,7 @@ const ApplicationDetails = () => {
           <div className="mt-6 flex justify-end">
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-white px-6 py-2.5 text-sm font-semibold text-[#143527] transition hover:bg-[#e6f0e4]"
+              className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-white px-6 py-2.5 text-sm font-semibold text-[#075B63] transition hover:bg-[#F0F8FD]"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Dashboard

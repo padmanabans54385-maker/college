@@ -94,20 +94,20 @@ const CollegeApplicationReview = () => {
 
   if (!application) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
 
         <main className="flex min-h-[70vh] items-center justify-center px-5">
           <div className="text-center">
-            <FileText className="mx-auto h-14 w-14 text-[#577063]" />
+            <FileText className="mx-auto h-14 w-14 text-[#5A6E78]" />
 
-            <h1 className="mt-5 font-heading text-3xl font-bold text-[#143527]">
+            <h1 className="mt-5 font-heading text-3xl font-bold text-[#075B63]">
               Application not found
             </h1>
 
             <Link
               to="/college"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white hover:bg-[#0b2017] transition"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 font-semibold text-white hover:bg-[#05434A] transition"
             >
               <ArrowLeft className="h-4 w-4" />
               College Dashboard
@@ -121,30 +121,30 @@ const CollegeApplicationReview = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
       <main>
-        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-10">
+        <section className="border-b border-[#E2ECF3] bg-[#E8F4FA] py-10">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link
               to="/college"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
             >
               <ArrowLeft className="h-4 w-4" />
               College Dashboard
             </Link>
 
             <div className="mt-6">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#577063]">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#5A6E78]">
                 Application Review
               </p>
 
-              <h1 className="mt-1 font-heading text-3xl font-extrabold tracking-tight text-[#143527] sm:text-4xl">
+              <h1 className="mt-1 font-heading text-3xl font-extrabold tracking-tight text-[#075B63] sm:text-4xl">
                 {application.personalDetails.fullName}
               </h1>
 
-              <p className="mt-1 text-sm font-medium text-[#577063]">
+              <p className="mt-1 text-sm font-medium text-[#5A6E78]">
                 {application.courseName}
               </p>
             </div>

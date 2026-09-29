@@ -319,23 +319,23 @@ const StudentProfile = () => {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-[#edf4ec]">
+      <main className="min-h-screen bg-[#F5F9FC]">
         <div className="mx-auto max-w-5xl px-6 py-10 lg:px-8">
           {/* Header */}
           <div className="mb-8">
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#075B63] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to Dashboard
             </Link>
 
-            <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#142e23]">
-              My <span className="font-serif-italic font-normal italic text-[#143527]">profile</span>
+            <h1 className="mt-4 font-heading text-4xl font-extrabold text-[#075B63]">
+              My <span className="font-serif-italic font-normal italic text-[#075B63]">profile</span>
             </h1>
 
-            <p className="mt-2 text-sm text-[#577063]">
+            <p className="mt-2 text-sm text-[#5A6E78]">
               Keep your profile and academic cutoff info updated to get accurate TNEA recommendations.
             </p>
           </div>
@@ -345,14 +345,14 @@ const StudentProfile = () => {
             className="space-y-6"
           >
             {/* Profile photo */}
-            <section className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
+            <section className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-xs">
               <SectionTitle
                 title="Profile Photo"
                 description="Add a photo to personalize your student profile."
               />
 
               <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-                <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-[#cdddc9] bg-[#dce8da]">
+                <div className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border border-[#E2ECF3] bg-[#E8F4FA]">
                   {profileImage ? (
                     <img
                       src={profileImage}
@@ -360,18 +360,18 @@ const StudentProfile = () => {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <UserRound className="h-12 w-12 text-[#143527]" />
+                    <UserRound className="h-12 w-12 text-[#075B63]" />
                   )}
 
                   {uploadingImage && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-[#143527]/70">
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#075B63]/70">
                       <Loader2 className="h-7 w-7 animate-spin text-white" />
                     </div>
                   )}
                 </div>
 
                 <div>
-                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#143527] px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]">
+                  <label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-[#075B63] px-5 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#05434A]">
                     <Camera className="h-4 w-4" />
                     Upload Photo
 
@@ -598,15 +598,15 @@ const StudentProfile = () => {
 
             {/* Save */}
             <div className="sticky bottom-4 z-10">
-              <div className="flex flex-col justify-between gap-4 rounded-3xl border border-[#cdddc9] bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center">
+              <div className="flex flex-col justify-between gap-4 rounded-3xl border border-[#E2ECF3] bg-white/95 p-4 shadow-xl backdrop-blur sm:flex-row sm:items-center">
                 <div>
                   {saved ? (
-                    <div className="flex items-center gap-2 text-sm font-bold text-emerald-800">
+                    <div className="flex items-center gap-2 text-sm font-bold text-[#075B63]">
                       <Check className="h-4 w-4" />
                       Profile saved successfully
                     </div>
                   ) : (
-                    <p className="text-sm font-medium text-[#577063]">
+                    <p className="text-sm font-medium text-[#5A6E78]">
                       Keep your profile updated for accurate TNEA recommendations.
                     </p>
                   )}
@@ -615,7 +615,7 @@ const StudentProfile = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0b2017] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#05434A] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {saving ? (
                     <>

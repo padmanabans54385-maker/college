@@ -79,24 +79,26 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
   };
 
   return (
-    <article className="surface-card card-interactive group overflow-hidden border border-[#cdddc9] bg-white rounded-3xl shadow-sm hover:shadow-md">
-      <div className="relative h-52 overflow-hidden bg-[#dce8da]">
-        {college.logo ? (
+    <article className="surface-card card-interactive group overflow-hidden border border-[#E2ECF3] bg-white rounded-3xl shadow-sm hover:shadow-md">
+      <div className="relative h-52 overflow-hidden bg-[#E8F4FA]">
+        {college.logo || college.images?.[0] ? (
           <img
-            src={college.logo}
+            src={college.logo || college.images?.[0]}
             alt={college.name}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full items-center justify-center font-heading text-5xl font-bold text-[#143527]/40">
-            {college.name.charAt(0)}
-          </div>
+          <img
+            src="/images/img5-campus.jpg"
+            alt=""
+            className="h-full w-full object-cover"
+          />
         )}
 
         <div className="absolute left-4 top-4">
           {college.verified && (
-            <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1 text-xs font-bold text-[#143527] shadow-xs">
-              <ShieldCheck className="h-4 w-4 text-[#143527]" />
+            <span className="inline-flex items-center gap-1 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3 py-1 text-xs font-bold text-[#075B63] shadow-xs">
+              <ShieldCheck className="h-4 w-4 text-[#075B63]" />
               Verified
             </span>
           )}
@@ -112,13 +114,13 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
                 ? "Remove from saved colleges"
                 : "Save college"
             }
-            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#cdddc9] bg-white shadow-xs transition hover:scale-105"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#E2ECF3] bg-white shadow-xs transition hover:scale-105"
           >
             <Heart
               className={`h-5 w-5 ${
                 saved
-                  ? "fill-[#143527] text-[#143527]"
-                  : "text-[#577063]"
+                  ? "fill-[#075B63] text-[#075B63]"
+                  : "text-[#5A6E78]"
               }`}
             />
           </button>
@@ -126,23 +128,23 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
       </div>
 
       <div className="p-6">
-        <h3 className="font-heading text-xl font-bold text-[#142e23]">
+        <h3 className="font-heading text-xl font-bold text-[#075B63]">
           {college.name}
         </h3>
 
-        <div className="mt-2 flex items-center gap-2 text-sm text-[#577063]">
-          <MapPin className="h-4 w-4 text-[#143527]" />
+        <div className="mt-2 flex items-center gap-2 text-sm text-[#5A6E78]">
+          <MapPin className="h-4 w-4 text-[#075B63]" />
           {college.location}, {college.district}
         </div>
 
-        <p className="mt-4 line-clamp-2 text-sm leading-6 text-[#465f51]">
+        <p className="mt-4 line-clamp-2 text-sm leading-6 text-[#5A6E78]">
           {college.description}
         </p>
 
         <div className="mt-6 flex items-center justify-between">
           <Link
             to={`/colleges/${college.id}`}
-            className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-4 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
+            className="inline-flex items-center gap-2 rounded-[0.625rem] bg-[#168FD0] px-4 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-[#127CB8]"
           >
             View Details
             <ArrowRight className="h-4 w-4" />
@@ -150,7 +152,7 @@ const CollegeCard = ({ college }: CollegeCardProps) => {
 
           <Link
             to={`/colleges/${college.id}/apply`}
-            className="text-sm font-semibold text-[#143527] hover:underline"
+            className="text-sm font-semibold text-[#075B63] hover:underline"
           >
             Apply Now
           </Link>

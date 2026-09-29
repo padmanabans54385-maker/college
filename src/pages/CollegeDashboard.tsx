@@ -71,18 +71,18 @@ const CollegeDashboard = () => {
 
   if (!profile?.collegeId) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
 
         <main className="flex min-h-[70vh] items-center justify-center px-5">
           <div className="max-w-md text-center">
-            <Building2 className="mx-auto h-14 w-14 text-[#577063]" />
+            <Building2 className="mx-auto h-14 w-14 text-[#5A6E78]" />
 
-            <h1 className="mt-5 font-heading text-3xl font-bold text-[#143527]">
+            <h1 className="mt-5 font-heading text-3xl font-bold text-[#075B63]">
               College account not configured
             </h1>
 
-            <p className="mt-3 text-sm text-[#577063]">
+            <p className="mt-3 text-sm text-[#5A6E78]">
               This college account has not been connected to a
               college profile yet.
             </p>
@@ -90,7 +90,7 @@ const CollegeDashboard = () => {
             <button
               type="button"
               onClick={handleLogout}
-              className="mt-6 rounded-full bg-[#143527] px-8 py-3 font-semibold text-white hover:bg-[#0b2017] transition"
+              className="mt-6 rounded-full bg-[#075B63] px-8 py-3 font-semibold text-white hover:bg-[#05434A] transition"
             >
               Logout
             </button>
@@ -104,11 +104,11 @@ const CollegeDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+      <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
         <Navbar />
 
         <div className="mx-auto max-w-7xl px-5 py-16">
-          <div className="h-80 animate-pulse rounded-3xl bg-[#cdddc9]/40" />
+          <div className="h-80 animate-pulse rounded-3xl bg-[#E2ECF3]/40" />
         </div>
       </div>
     );
@@ -127,24 +127,24 @@ const CollegeDashboard = () => {
   ).length;
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
       <main>
-        <section className="border-b border-[#cdddc9] bg-[#dce8da] py-12">
+        <section className="border-b border-[#E2ECF3] bg-[#E8F4FA] py-12">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
-                  <Building2 className="h-4 w-4 text-[#143527]" />
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-semibold text-[#075B63]">
+                  <Building2 className="h-4 w-4 text-[#075B63]" />
                   College Portal
                 </div>
 
-                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527] sm:text-4xl">
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63] sm:text-4xl">
                   {college?.name || profile.name}
                 </h1>
 
-                <p className="mt-2 text-[#577063]">
+                <p className="mt-2 text-[#5A6E78]">
                   Manage admissions, enquiries and applications.
                 </p>
               </div>
@@ -152,7 +152,7 @@ const CollegeDashboard = () => {
               <div className="flex gap-3">
                 <Link
                   to={`/colleges/${profile.collegeId}`}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white transition hover:bg-[#0b2017]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 font-semibold text-white transition hover:bg-[#05434A]"
                 >
                   View Profile
                   <ArrowRight className="h-4 w-4" />
@@ -161,7 +161,7 @@ const CollegeDashboard = () => {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#143527] bg-transparent px-5 py-3 font-semibold text-[#143527] transition hover:bg-[#143527] hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#075B63] bg-transparent px-5 py-3 font-semibold text-[#075B63] transition hover:bg-[#075B63] hover:text-white"
                 >
                   <LogOut className="h-4 w-4" />
                   Logout
@@ -200,10 +200,10 @@ const CollegeDashboard = () => {
           </div>
 
           {/* Applications */}
-          <div className="mt-10 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
+          <div className="mt-10 rounded-3xl border border-[#E2ECF3] bg-white p-7 shadow-xs">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-heading text-2xl font-bold text-[#143527]">
+                <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                   Recent Applications
                 </h2>
 
@@ -272,13 +272,13 @@ const CollegeDashboard = () => {
           </div>
 
           {/* Enquiries */}
-          <div className="mt-8 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs">
+          <div className="mt-8 rounded-3xl border border-[#E2ECF3] bg-white p-7 shadow-xs">
             <div className="mb-6">
-              <h2 className="font-heading text-2xl font-bold text-[#143527]">
+              <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                 Admission Enquiries
               </h2>
 
-              <p className="mt-1 text-sm text-[#577063]">
+              <p className="mt-1 text-sm text-[#5A6E78]">
                 Students who have shown interest in your college.
               </p>
             </div>

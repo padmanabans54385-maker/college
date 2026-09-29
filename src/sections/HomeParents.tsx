@@ -1,58 +1,58 @@
-import { CheckCircle2 } from "lucide-react";
+import { brand } from "../config/brand";
+import { AppleIcon, GrowthArrowIcon, LightbulbIcon } from "../components/icons/AcademicIcons";
 
 const HomeParents = () => (
-  <section className="bg-[#edf4ec] py-16 border-t border-[#cdddc9]/60">
+  <section className="bg-white py-16 border-t border-[#E2ECF3]">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-        <div className="lg:col-span-7">
-          <h2 className="font-heading text-3xl font-extrabold tracking-tight text-[#142e23] sm:text-4xl">
-            Built for students & parents
+      <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-6">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-[#075B63] sm:text-4xl">
+            Built for students &amp; parents
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#465f51]">
-            Admission decisions involve the whole family. CollegeCrop keeps every step clear, fast and transparent — so parents and students can make confident choices.
+          <p className="mt-4 max-w-2xl font-poppins text-base leading-relaxed text-[#5A6E78]">
+            Admission decisions involve the whole family. {brand.name} keeps every step clear,
+            so students and parents can choose with confidence.
           </p>
 
           <div className="mt-6 space-y-3">
             {[
-              "Verified college profiles with source metadata",
-              "Free human-first guidance for first-generation learners",
-              "Clear labels on historical, estimated and official data",
-            ].map((feature, i) => (
-              <div key={i} className="flex items-center gap-2.5 text-sm font-medium text-[#142e23]">
-                <CheckCircle2 className="h-4 w-4 text-[#143527] shrink-0" />
-                <span>{feature}</span>
+              { icon: LightbulbIcon, text: "Verified college profiles with source metadata" },
+              { icon: AppleIcon, text: "Free human-first guidance for first-generation learners" },
+              { icon: GrowthArrowIcon, text: "Clear labels on historical, estimated, and official data" },
+            ].map((feature) => (
+              <div key={feature.text} className="flex items-center gap-3 font-poppins text-sm font-medium text-[#172B35]">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#F0F8FD] text-[#075B63]">
+                  <feature.icon size={18} />
+                </span>
+                <span>{feature.text}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="lg:col-span-5">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-[#cdddc9] bg-white p-6 shadow-xs sm:col-span-2">
-              <span className="font-heading text-4xl font-extrabold text-[#143527]">
-                2,400+
-              </span>
-              <p className="mt-1 text-xs font-semibold text-[#577063]">
-                students guided through TNEA counselling choices since 2023
-              </p>
+        <div className="lg:col-span-6">
+          <div className="academic-card overflow-hidden">
+            <div className="aspect-video overflow-hidden bg-[#F5F9FC]">
+              <img
+                src={brand.images.students}
+                alt="Students planning education together"
+                className="h-full w-full object-cover object-center"
+                loading="lazy"
+              />
             </div>
-
-            <div className="rounded-2xl border border-[#cdddc9] bg-white p-5 shadow-xs">
-              <span className="font-heading text-3xl font-extrabold text-[#143527]">
-                32
-              </span>
-              <p className="mt-1 text-xs font-semibold text-[#577063]">
-                districts covered
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-[#cdddc9] bg-white p-5 shadow-xs">
-              <span className="font-heading text-3xl font-extrabold text-[#143527]">
-                4.8/5
-              </span>
-              <p className="mt-1 text-xs font-semibold text-[#577063]">
-                parent satisfaction
-              </p>
+            <div className="grid gap-4 p-5 sm:grid-cols-3">
+              <div>
+                <span className="font-heading text-2xl font-bold text-[#075B63]">2,400+</span>
+                <p className="mt-1 font-poppins text-xs text-[#5A6E78]">students guided since 2023</p>
+              </div>
+              <div>
+                <span className="font-heading text-2xl font-bold text-[#075B63]">32</span>
+                <p className="mt-1 font-poppins text-xs text-[#5A6E78]">districts covered</p>
+              </div>
+              <div>
+                <span className="font-heading text-2xl font-bold text-[#075B63]">4.8/5</span>
+                <p className="mt-1 font-poppins text-xs text-[#5A6E78]">parent satisfaction</p>
+              </div>
             </div>
           </div>
         </div>

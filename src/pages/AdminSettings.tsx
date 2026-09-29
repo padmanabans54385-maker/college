@@ -22,10 +22,10 @@ const AdminSettings = () => {
   };
 
   const field = (key: keyof SiteContactSettings, label: string) => (
-    <label className="grid gap-1.5 text-sm font-semibold text-[#142e23]">
+    <label className="grid gap-1.5 text-sm font-semibold text-[#075B63]">
       {label}
       <input
-        className="rounded-2xl border border-[#cdddc9] bg-white px-4 py-2.5 text-sm text-[#142e23] outline-none focus:border-[#143527] focus:ring-1 focus:ring-[#143527]"
+        className="rounded-2xl border border-[#E2ECF3] bg-white px-4 py-2.5 text-sm text-[#075B63] outline-none focus:border-[#075B63] focus:ring-1 focus:ring-[#075B63]"
         value={contact[key] || ""}
         onChange={(event) => setContact({ ...contact, [key]: event.target.value })}
       />
@@ -33,30 +33,30 @@ const AdminSettings = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
-      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+      <header className="border-b border-[#E2ECF3] bg-[#E8F4FA]">
         <div className="mx-auto max-w-4xl px-5 py-8 sm:px-6 lg:px-8">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
           >
             <ArrowLeft className="h-4 w-4" />
             Admin Dashboard
           </Link>
 
-          <h1 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
+          <h1 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-[#075B63]">
             Platform Settings
           </h1>
-          <p className="mt-1 text-sm text-[#577063]">
+          <p className="mt-1 text-sm text-[#5A6E78]">
             Manage helpline contact details, social links, and office information.
           </p>
         </div>
       </header>
 
       <main className="mx-auto max-w-4xl px-5 py-10 sm:px-6 lg:px-8">
-        <form onSubmit={onSubmit} className="rounded-3xl border border-[#cdddc9] bg-white p-6 sm:p-8 shadow-xs space-y-5">
+        <form onSubmit={onSubmit} className="rounded-3xl border border-[#E2ECF3] bg-white p-6 sm:p-8 shadow-xs space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             {field("phone", "Helpline Phone Number")}
             {field("phoneSecondary", "Secondary Phone Number")}
@@ -72,11 +72,11 @@ const AdminSettings = () => {
           <div className="pt-4 flex items-center justify-between">
             <button
               type="submit"
-              className="rounded-full bg-[#143527] px-8 py-3 font-semibold text-white hover:bg-[#0b2017] transition"
+              className="rounded-full bg-[#075B63] px-8 py-3 font-semibold text-white hover:bg-[#05434A] transition"
             >
               Save Settings
             </button>
-            {saved && <p className="text-sm font-semibold text-emerald-700">✓ Settings saved successfully!</p>}
+            {saved && <p className="text-sm font-semibold text-[#075B63]">✓ Settings saved successfully!</p>}
           </div>
         </form>
       </main>

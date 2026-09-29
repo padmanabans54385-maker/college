@@ -27,11 +27,11 @@ const ScholarshipDetails = () => {
   if (loading) return <LoadingSkeleton label="Loading scholarship details" />;
   if (!scholarship) {
     return (
-      <main className="bg-[#edf4ec] py-16">
+      <main className="bg-[#F5F9FC] py-16">
         <div className="mx-auto max-w-3xl px-4">
           <EmptyState title="Scholarship not found" description="This scholarship program is currently unavailable." />
           <div className="mt-6 text-center">
-            <Link to="/scholarships" className="inline-flex items-center gap-2 rounded-full bg-[#143527] px-6 py-3 text-sm font-semibold text-white">
+            <Link to="/scholarships" className="inline-flex items-center gap-2 rounded-full bg-[#075B63] px-6 py-3 text-sm font-semibold text-white">
               Browse All Scholarships
             </Link>
           </div>
@@ -41,31 +41,31 @@ const ScholarshipDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#edf4ec]">
-      <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-12 sm:py-16 text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC]">
+      <section className="border-b border-[#E2ECF3]/60 bg-[#E8F4FA] py-12 sm:py-16 text-[#075B63]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link
             to="/scholarships"
-            className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
+            className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-[#075B63] hover:underline"
           >
             <ArrowLeft size={16} />
             Back to Scholarships
           </Link>
 
           <div className="max-w-4xl">
-            <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white shadow-xs">
-              <Award size={24} className="text-[#dce8da]" />
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#075B63] text-white shadow-xs">
+              <Award size={24} className="text-[#E8F4FA]" />
             </div>
 
-            <p className="mt-4 text-xs font-bold uppercase tracking-widest text-[#143527]">
+            <p className="mt-4 text-xs font-bold uppercase tracking-widest text-[#075B63]">
               {scholarship.provider}
             </p>
 
-            <h1 className="mt-2 font-heading text-3xl font-extrabold tracking-tight sm:text-5xl text-[#142e23]">
+            <h1 className="mt-2 font-heading text-3xl font-extrabold tracking-tight sm:text-5xl text-[#075B63]">
               {scholarship.name}
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base text-[#465f51] leading-relaxed">
+            <p className="mt-4 max-w-3xl text-base text-[#5A6E78] leading-relaxed">
               {scholarship.description}
             </p>
           </div>
@@ -77,77 +77,77 @@ const ScholarshipDetails = () => {
           <div className="lg:col-span-2 space-y-6">
             {/* KEY INFORMATION */}
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-sm">
-                <IndianRupee size={22} className="text-[#143527]" />
-                <p className="mt-3 text-xs font-bold uppercase text-[#577063]">
+              <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-sm">
+                <IndianRupee size={22} className="text-[#075B63]" />
+                <p className="mt-3 text-xs font-bold uppercase text-[#5A6E78]">
                   Scholarship Amount
                 </p>
-                <p className="mt-1 font-heading text-xl font-bold text-[#143527]">
+                <p className="mt-1 font-heading text-xl font-bold text-[#075B63]">
                   {scholarship.amount || "Financial Support"}
                 </p>
               </div>
 
-              <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-sm">
-                <CalendarDays size={22} className="text-[#143527]" />
-                <p className="mt-3 text-xs font-bold uppercase text-[#577063]">
+              <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-sm">
+                <CalendarDays size={22} className="text-[#075B63]" />
+                <p className="mt-3 text-xs font-bold uppercase text-[#5A6E78]">
                   Application Deadline
                 </p>
-                <p className="mt-1 font-heading text-xl font-bold text-[#142e23]">
+                <p className="mt-1 font-heading text-xl font-bold text-[#075B63]">
                   {scholarship.applicationDeadline || "Open / Rolling"}
                 </p>
               </div>
             </div>
 
             {/* ELIGIBILITY */}
-            <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 sm:p-8 shadow-sm">
-              <h2 className="font-heading text-2xl font-bold text-[#142e23]">
+            <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 sm:p-8 shadow-sm">
+              <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                 Eligibility & Requirements
               </h2>
 
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#465f51]">
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#5A6E78]">
                 {scholarship.eligibility || "Eligibility requirements apply based on academic cutoff and income norms."}
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 {scholarship.incomeLimit && (
-                  <div className="rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/50 p-4">
-                    <p className="text-xs font-bold uppercase text-[#577063]">
+                  <div className="rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/50 p-4">
+                    <p className="text-xs font-bold uppercase text-[#5A6E78]">
                       Family Income Limit
                     </p>
-                    <p className="mt-1 font-bold text-[#142e23]">
+                    <p className="mt-1 font-bold text-[#075B63]">
                       {scholarship.incomeLimit}
                     </p>
                   </div>
                 )}
 
                 {scholarship.educationLevel && (
-                  <div className="rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/50 p-4">
-                    <p className="text-xs font-bold uppercase text-[#577063]">
+                  <div className="rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/50 p-4">
+                    <p className="text-xs font-bold uppercase text-[#5A6E78]">
                       Education Level
                     </p>
-                    <p className="mt-1 font-bold text-[#142e23]">
+                    <p className="mt-1 font-bold text-[#075B63]">
                       {scholarship.educationLevel}
                     </p>
                   </div>
                 )}
 
                 {scholarship.category && (
-                  <div className="rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/50 p-4">
-                    <p className="text-xs font-bold uppercase text-[#577063]">
+                  <div className="rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/50 p-4">
+                    <p className="text-xs font-bold uppercase text-[#5A6E78]">
                       Category
                     </p>
-                    <p className="mt-1 font-bold text-[#142e23]">
+                    <p className="mt-1 font-bold text-[#075B63]">
                       {scholarship.category}
                     </p>
                   </div>
                 )}
 
                 {scholarship.state && (
-                  <div className="rounded-2xl border border-[#cdddc9] bg-[#edf4ec]/50 p-4">
-                    <p className="text-xs font-bold uppercase text-[#577063]">
+                  <div className="rounded-2xl border border-[#E2ECF3] bg-[#F5F9FC]/50 p-4">
+                    <p className="text-xs font-bold uppercase text-[#5A6E78]">
                       State Scope
                     </p>
-                    <p className="mt-1 font-bold text-[#142e23]">
+                    <p className="mt-1 font-bold text-[#075B63]">
                       {scholarship.state}
                     </p>
                   </div>
@@ -156,11 +156,11 @@ const ScholarshipDetails = () => {
             </div>
 
             {/* DESCRIPTION */}
-            <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 sm:p-8 shadow-sm">
-              <h2 className="font-heading text-2xl font-bold text-[#142e23]">
+            <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 sm:p-8 shadow-sm">
+              <h2 className="font-heading text-2xl font-bold text-[#075B63]">
                 About this scholarship
               </h2>
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#465f51]">
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-[#5A6E78]">
                 {scholarship.description}
               </p>
             </div>
@@ -168,16 +168,16 @@ const ScholarshipDetails = () => {
 
           {/* APPLY SIDEBAR */}
           <aside>
-            <div className="sticky top-24 rounded-3xl border border-[#cdddc9] bg-[#143527] p-8 text-white shadow-xl">
+            <div className="sticky top-24 rounded-3xl border border-[#E2ECF3] bg-[#075B63] p-8 text-white shadow-xl">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md">
-                <GraduationCap size={24} className="text-[#dce8da]" />
+                <GraduationCap size={24} className="text-[#E8F4FA]" />
               </div>
 
               <h2 className="mt-5 font-heading text-2xl font-bold">
                 Apply for Scholarship
               </h2>
 
-              <p className="mt-3 text-sm leading-relaxed text-[#c4e0ce]">
+              <p className="mt-3 text-sm leading-relaxed text-[#BBE1F5]">
                 Review the eligibility criteria carefully before accessing the official application link.
               </p>
 
@@ -186,19 +186,19 @@ const ScholarshipDetails = () => {
                   href={scholarship.applicationUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-8 flex items-center justify-center gap-2 rounded-full bg-white py-3.5 text-sm font-bold text-[#143527] shadow-md transition hover:bg-[#dce8da]"
+                  className="mt-8 flex items-center justify-center gap-2 rounded-full bg-white py-3.5 text-sm font-bold text-[#075B63] shadow-md transition hover:bg-[#E8F4FA]"
                 >
                   <span>Apply Officially</span>
                   <ArrowUpRight size={16} />
                 </a>
               ) : (
-                <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 p-4 text-center text-xs font-medium text-[#c4e0ce]">
+                <div className="mt-8 rounded-2xl border border-white/15 bg-white/10 p-4 text-center text-xs font-medium text-[#BBE1F5]">
                   Official application link will be updated soon.
                 </div>
               )}
 
               {scholarship.applicationStart && (
-                <p className="mt-5 text-center text-xs text-[#a8d5ba]">
+                <p className="mt-5 text-center text-xs text-[#4DB3E8]">
                   Applications open: {scholarship.applicationStart}
                 </p>
               )}

@@ -420,35 +420,35 @@ const CollegeApplication = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#edf4ec]">
+    <div className="min-h-screen bg-[#F5F9FC]">
       <Navbar />
 
       <main>
         {/* Header */}
-        <section className="border-b border-[#cdddc9]/60 bg-[#dce8da] py-10 text-[#142e23]">
+        <section className="border-b border-[#E2ECF3]/60 bg-[#E8F4FA] py-10 text-[#075B63]">
           <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
             <Link
               to={`/colleges/${college.id}`}
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#075B63] hover:underline"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to College
             </Link>
 
             <div className="mt-6">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#143527]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-[#075B63]">
                 Official Admission Application
               </span>
 
-              <h1 className="mt-3 font-heading text-3xl font-extrabold sm:text-4xl text-[#142e23]">
-                Applying to <span className="font-serif-italic font-normal italic text-[#143527]">{college.name}</span>
+              <h1 className="mt-3 font-heading text-3xl font-extrabold sm:text-4xl text-[#075B63]">
+                Applying to <span className="font-serif-italic font-normal italic text-[#075B63]">{college.name}</span>
               </h1>
             </div>
           </div>
         </section>
 
         {/* Progress Stepper */}
-        <section className="border-b border-[#cdddc9] bg-white">
+        <section className="border-b border-[#E2ECF3] bg-white">
           <div className="mx-auto max-w-5xl px-5 py-7">
             <div className="flex items-center justify-between">
               {steps.map((item, index) => {
@@ -465,8 +465,8 @@ const CollegeApplication = () => {
                       <div
                         className={`flex h-10 w-10 items-center justify-center rounded-full border text-sm font-bold transition ${
                           active
-                            ? "border-[#143527] bg-[#143527] text-white shadow-xs"
-                            : "border-[#cdddc9] bg-white text-[#577063]"
+                            ? "border-[#075B63] bg-[#075B63] text-white shadow-xs"
+                            : "border-[#E2ECF3] bg-white text-[#5A6E78]"
                         }`}
                       >
                         {active && step > item.number ? (
@@ -479,8 +479,8 @@ const CollegeApplication = () => {
                       <span
                         className={`mt-2 hidden text-xs font-bold sm:block ${
                           current
-                            ? "text-[#143527]"
-                            : "text-[#577063]"
+                            ? "text-[#075B63]"
+                            : "text-[#5A6E78]"
                         }`}
                       >
                         {item.title}
@@ -491,8 +491,8 @@ const CollegeApplication = () => {
                       <div
                         className={`mx-3 h-0.5 flex-1 transition ${
                           step > item.number
-                            ? "bg-[#143527]"
-                            : "bg-[#cdddc9]"
+                            ? "bg-[#075B63]"
+                            : "bg-[#E2ECF3]"
                         }`}
                       />
                     )}
@@ -892,7 +892,7 @@ const CollegeApplication = () => {
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#143527] px-7 font-semibold text-white shadow-md transition hover:bg-[#0b2017]"
+                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#075B63] px-7 font-semibold text-white shadow-md transition hover:bg-[#05434A]"
                 >
                   Continue
                   <ArrowRight className="h-4 w-4" />
@@ -902,7 +902,7 @@ const CollegeApplication = () => {
                   type="button"
                   onClick={submitApplication}
                   disabled={submitting}
-                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#143527] px-7 font-semibold text-white shadow-md transition hover:bg-[#0b2017] disabled:opacity-60"
+                  className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-[#075B63] px-7 font-semibold text-white shadow-md transition hover:bg-[#05434A] disabled:opacity-60"
                 >
                   {submitting ? (
                     <>

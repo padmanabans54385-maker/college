@@ -398,34 +398,34 @@ const Colleges = () => {
 
   return (
     <>
-      <main className="min-h-screen bg-[#edf4ec]">
+      <main className="min-h-screen bg-[#F5F9FC]">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-[#dce8da] py-16 text-[#142e23] border-b border-[#cdddc9]/60 lg:py-20">
-          <div className="absolute top-0 right-0 h-96 w-96 bg-[#2e694d]/15 blur-[130px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 h-80 w-80 bg-[#143527]/10 blur-[100px] pointer-events-none" />
+        <section className="relative overflow-hidden bg-[#E8F4FA] py-16 text-[#075B63] border-b border-[#E2ECF3]/60 lg:py-20">
+          <div className="absolute top-0 right-0 h-96 w-96 bg-[#0A6D77]/15 blur-[130px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 h-80 w-80 bg-[#075B63]/10 blur-[100px] pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#143527]">
-                <Search className="h-3.5 w-3.5 text-[#143527]" />
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#075B63]">
+                <Search className="h-3.5 w-3.5 text-[#075B63]" />
                 Accredited College Directory
               </div>
 
-              <h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl text-[#142e23]">
+              <h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl text-[#075B63]">
                 Find the Right College <br className="hidden sm:inline" />
-                <span className="font-serif-italic font-normal italic text-[#143527]">For Your Career Path</span>
+                <span className="font-serif-italic font-normal italic text-[#075B63]">For Your Career Path</span>
               </h1>
 
-              <p className="mt-4 text-base leading-relaxed text-[#465f51] md:text-lg">
+              <p className="mt-4 text-base leading-relaxed text-[#5A6E78] md:text-lg">
                 Explore accredited engineering, medical, management, and science colleges across Tamil Nadu. Filter by district, degree course, or cut-offs.
               </p>
             </div>
 
             {/* Search */}
-            <div className="mt-8 rounded-3xl border border-[#cdddc9] bg-white p-3 shadow-lg">
+            <div className="mt-8 rounded-3xl border border-[#E2ECF3] bg-white p-3 shadow-lg">
               <div className="flex flex-col gap-2 md:flex-row">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#577063]" />
+                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#5A6E78]" />
                   <input
                     value={filters.search}
                     onChange={(event) =>
@@ -434,14 +434,14 @@ const Colleges = () => {
                       })
                     }
                     placeholder="Search college name, city, district, or degree..."
-                    className="w-full rounded-2xl bg-[#edf4ec]/50 border border-[#cdddc9] px-12 py-3.5 text-sm text-[#142e23] placeholder-[#577063]/60 outline-none transition focus:border-[#143527] focus:bg-white focus:ring-2 focus:ring-[#143527]/20"
+                    className="w-full rounded-2xl bg-[#F5F9FC]/50 border border-[#E2ECF3] px-12 py-3.5 text-sm text-[#075B63] placeholder-[#5A6E78]/60 outline-none transition focus:border-[#075B63] focus:bg-white focus:ring-2 focus:ring-[#075B63]/20"
                   />
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#143527] px-5 py-3 text-sm font-semibold text-white md:hidden"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#075B63] px-5 py-3 text-sm font-semibold text-white md:hidden"
                 >
                   <SlidersHorizontal className="h-4 w-4" />
                   Filter Options
@@ -879,9 +879,9 @@ const CollegeDiscoveryCard = ({
   onCompare: () => void;
 }) => {
   return (
-    <article className="surface-card card-interactive shimmer-card group flex flex-col justify-between overflow-hidden border border-[#cdddc9] bg-white rounded-3xl shadow-sm hover:shadow-md">
+    <article className="surface-card card-interactive shimmer-card group flex flex-col justify-between overflow-hidden border border-[#E2ECF3] bg-white rounded-3xl shadow-sm hover:shadow-md">
       <div>
-        <div className="relative h-48 overflow-hidden bg-[#dce8da]">
+        <div className="relative h-48 overflow-hidden bg-[#E8F4FA]">
           {college.logo ? (
             <img
               src={college.logo}
@@ -889,21 +889,21 @@ const CollegeDiscoveryCard = ({
               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#143527] to-[#1a4332] text-5xl font-heading font-black text-white">
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#075B63] to-[#05434A] text-5xl font-heading font-black text-white">
               {college.name.charAt(0)}
             </div>
           )}
 
           <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
             {college.verified && (
-              <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3 py-1 text-[11px] font-bold text-[#143527] shadow-xs">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#143527]" />
+              <span className="inline-flex items-center gap-1 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3 py-1 text-[11px] font-bold text-[#075B63] shadow-xs">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#075B63]" />
                 Verified
               </span>
             )}
 
             {recommended && (
-              <span className="rounded-full bg-[#143527] px-3 py-1 text-[11px] font-bold text-white shadow-xs">
+              <span className="rounded-full bg-[#075B63] px-3 py-1 text-[11px] font-bold text-white shadow-xs">
                 Recommended
               </span>
             )}
@@ -912,31 +912,31 @@ const CollegeDiscoveryCard = ({
           <button
             type="button"
             onClick={onSave}
-            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#cdddc9] bg-white/90 backdrop-blur-md shadow-xs transition hover:scale-110"
+            className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-[#E2ECF3] bg-white/90 backdrop-blur-md shadow-xs transition hover:scale-110"
             aria-label={saved ? "Remove saved college" : "Save college"}
           >
             <Heart
               className={`h-4 w-4 transition-colors ${
-                saved ? "fill-[#143527] text-[#143527]" : "text-[#577063] hover:text-[#143527]"
+                saved ? "fill-[#075B63] text-[#075B63]" : "text-[#5A6E78] hover:text-[#075B63]"
               }`}
             />
           </button>
         </div>
 
         <div className="p-5">
-          <h3 className="line-clamp-2 font-heading text-lg font-bold text-[#142e23] group-hover:text-[#143527] transition-colors">
+          <h3 className="line-clamp-2 font-heading text-lg font-bold text-[#075B63] group-hover:text-[#075B63] transition-colors">
             {college.name}
           </h3>
 
-          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#577063]">
-            <MapPin className="h-3.5 w-3.5 text-[#143527] shrink-0" />
+          <div className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#5A6E78]">
+            <MapPin className="h-3.5 w-3.5 text-[#075B63] shrink-0" />
             <span>
               {college.location}
               {college.district ? `, ${college.district}` : ""}
             </span>
           </div>
 
-          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#465f51]">
+          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#5A6E78]">
             {college.description}
           </p>
 
@@ -945,7 +945,7 @@ const CollegeDiscoveryCard = ({
               {college.courses.slice(0, 3).map((course) => (
                 <span
                   key={course}
-                  className="rounded-full border border-[#cdddc9] bg-[#e6f0e4]/60 px-2.5 py-1 text-[11px] font-medium text-[#143527]"
+                  className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD]/60 px-2.5 py-1 text-[11px] font-medium text-[#075B63]"
                 >
                   {course}
                 </span>
@@ -959,14 +959,14 @@ const CollegeDiscoveryCard = ({
         <div className="grid grid-cols-2 gap-2">
           <Link
             to={`/colleges/${college.id}`}
-            className="rounded-full bg-[#143527] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-xs transition hover:bg-[#0b2017]"
+            className="rounded-full bg-[#075B63] px-3 py-2.5 text-center text-xs font-semibold text-white shadow-xs transition hover:bg-[#05434A]"
           >
             View Details
           </Link>
 
           <Link
             to={`/colleges/${college.id}/apply`}
-            className="rounded-full border border-[#cdddc9] bg-[#edf4ec]/60 px-3 py-2.5 text-center text-xs font-semibold text-[#142e23] transition hover:bg-[#dce8da] hover:text-[#143527]"
+            className="rounded-full border border-[#E2ECF3] bg-[#F5F9FC]/60 px-3 py-2.5 text-center text-xs font-semibold text-[#075B63] transition hover:bg-[#E8F4FA] hover:text-[#075B63]"
           >
             Apply Now
           </Link>

@@ -168,14 +168,14 @@ const AdminOnlineCourses = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#edf4ec] font-sans text-[#142e23]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
       <Navbar />
 
-      <header className="border-b border-[#cdddc9] bg-[#dce8da]">
+      <header className="border-b border-[#E2ECF3] bg-[#E8F4FA]">
         <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
           <Link
             to="/admin"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#577063] hover:text-[#143527]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
           >
             <ArrowLeft className="h-4 w-4" />
             Admin Dashboard
@@ -183,16 +183,16 @@ const AdminOnlineCourses = () => {
 
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#143527] text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#075B63] text-white">
                 <BookOpen size={22} />
               </div>
 
               <div>
-                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#143527]">
+                <h1 className="font-heading text-3xl font-extrabold tracking-tight text-[#075B63]">
                   Online Courses
                 </h1>
 
-                <p className="mt-1 text-sm text-[#577063]">
+                <p className="mt-1 text-sm text-[#5A6E78]">
                   Manage online learning content
                 </p>
               </div>
@@ -201,7 +201,7 @@ const AdminOnlineCourses = () => {
             <button
               type="button"
               onClick={openCreate}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#0b2017] transition"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-6 py-2.5 text-sm font-semibold text-white hover:bg-[#05434A] transition"
             >
               <Plus size={18} />
               Add Course
@@ -532,7 +532,7 @@ const Field = ({
   placeholder?: string;
 }) => (
   <div>
-    <label className="mb-2 block text-sm font-semibold text-[#142e23]">
+    <label className="mb-2 block text-sm font-semibold text-[#075B63]">
       {label}
     </label>
 
@@ -542,7 +542,7 @@ const Field = ({
         onChange(event.target.value)
       }
       placeholder={placeholder}
-      className="w-full rounded-2xl border border-[#cdddc9] px-4 py-3 text-sm text-[#142e23] outline-none focus:border-[#143527]"
+      className="w-full rounded-2xl border border-[#E2ECF3] px-4 py-3 text-sm text-[#075B63] outline-none focus:border-[#075B63]"
     />
   </div>
 );
@@ -554,12 +554,12 @@ const Stat = ({
   label: string;
   value: number;
 }) => (
-  <div className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
-    <p className="text-xs font-semibold uppercase tracking-wider text-[#577063]">
+  <div className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-xs">
+    <p className="text-xs font-semibold uppercase tracking-wider text-[#5A6E78]">
       {label}
     </p>
 
-    <p className="mt-2 font-heading text-3xl font-extrabold text-[#143527]">
+    <p className="mt-2 font-heading text-3xl font-extrabold text-[#075B63]">
       {value}
     </p>
   </div>

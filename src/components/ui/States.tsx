@@ -2,8 +2,8 @@ import { AlertCircle, Inbox, Loader2, RefreshCw } from "lucide-react";
 import type { ReactNode } from "react";
 
 export const LoadingSkeleton = ({ label = "Loading" }: { label?: string }) => (
-  <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-[#577063]">
-    <Loader2 className="h-8 w-8 animate-spin text-[#143527]" aria-hidden />
+  <div className="flex min-h-[40vh] flex-col items-center justify-center gap-3 text-[#5A6E78]">
+    <Loader2 className="h-8 w-8 animate-spin text-[#075B63]" aria-hidden />
     <p className="text-sm font-medium">{label}…</p>
   </div>
 );
@@ -17,12 +17,12 @@ export const EmptyState = ({
   description: string;
   action?: ReactNode;
 }) => (
-  <div className="surface-card border border-[#cdddc9] bg-white rounded-3xl px-6 py-16 text-center shadow-xs">
-    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e6f0e4] text-[#143527]">
+  <div className="surface-card border border-[#E2ECF3] bg-white rounded-3xl px-6 py-16 text-center shadow-xs">
+    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F0F8FD] text-[#075B63]">
       <Inbox className="h-6 w-6" />
     </div>
-    <h2 className="mt-4 font-heading text-xl font-bold text-[#142e23]">{title}</h2>
-    <p className="mx-auto mt-2 max-w-lg text-sm text-[#577063]">{description}</p>
+    <h2 className="mt-4 font-heading text-xl font-bold text-[#075B63]">{title}</h2>
+    <p className="mx-auto mt-2 max-w-lg text-sm text-[#5A6E78]">{description}</p>
     {action && <div className="mt-6">{action}</div>}
   </div>
 );
