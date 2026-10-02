@@ -4,6 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PublicLayout from "./layouts/PublicLayout";
 import { LoadingSkeleton } from "./components/ui/States";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -68,6 +69,7 @@ const CounsellingRequestPage = lazy(() => import("./pages/CounsellingRequestPage
 const App = () => (
   <ErrorBoundary>
     <BrowserRouter>
+      <ScrollToTop />
       <Suspense fallback={<LoadingSkeleton />}>
         <Routes>
           <Route element={<PublicLayout />}>
