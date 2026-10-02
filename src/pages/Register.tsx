@@ -16,6 +16,7 @@ import {
   Mail,
   UserRound,
   CheckCircle2,
+  Sparkles,
 } from "lucide-react";
 
 import { registerUser } from "../firebase/auth";

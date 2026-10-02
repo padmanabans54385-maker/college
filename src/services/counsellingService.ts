@@ -6,8 +6,12 @@ import type { CounsellingRequest } from "../types";
 export const createCounsellingRequest = async (
   data: Omit<CounsellingRequest, "id" | "createdAt" | "updatedAt" | "status">
 ) => {
+  const cleanData = Object.fromEntries(
+    Object.entries(data).filter(([_, value]) => value !== undefined)
+  );
+
   return await createDocument("counselling_requests", {
-    ...data,
+    ...cleanData,
     status: "new",
   });
 };

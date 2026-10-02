@@ -29,42 +29,43 @@ import type { College } from "../types";
 
 const emptyForm = {
   name: "",
+  overview: "",
+  university: "",
+  collegeType: "Government",
+  tneaCode: "",
+  eligibility: "",
+  admission: "",
+  tuitionFees: "",
+  hostel: "",
+  facilities: "",
+  placement: "",
+  recruiters: "",
+  accreditation: "",
+  rankings: "",
   location: "",
   district: "",
   state: "Tamil Nadu",
-  description: "",
-  website: "",
   phone: "",
   email: "",
+  website: "",
   courses: "",
   verified: false,
 };
 
 const AdminColleges = () => {
   const [colleges, setColleges] = useState<College[]>([]);
-
   const [loading, setLoading] = useState(true);
-
   const [search, setSearch] = useState("");
-
   const [showForm, setShowForm] = useState(false);
-
-  const [editingId, setEditingId] = useState<string | null>(
-    null
-  );
-
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
-
   const [saving, setSaving] = useState(false);
-
   const [error, setError] = useState("");
 
   const loadColleges = async () => {
     try {
       setLoading(true);
-
       const data = await getColleges();
-
       setColleges(data);
     } catch (error) {
       console.error(error);
@@ -95,13 +96,37 @@ const AdminColleges = () => {
   const openEditForm = (college: College) => {
     setForm({
       name: college.name || "",
+      overview: college.overview || college.description || "",
+      university: college.university || "",
+      collegeType: college.collegeType || "Government",
+      tneaCode: college.tneaCode || "",
+      eligibility: college.eligibility || "",
+      admission: college.admission || college.admissionNotes || "",
+      tuitionFees: college.tuitionFees || college.fees?.tuition || college.feeRange || "",
+      hostel: college.hostelInfo || college.hostel?.details || "",
+      facilities: Array.isArray(college.facilities)
+        ? college.facilities.join(", ")
+        : college.facilities || "",
+      placement:
+        typeof college.placement === "string"
+          ? college.placement
+          : [
+              college.placements?.rate && `Rate: ${college.placements.rate}`,
+              college.placements?.averagePackage && `Avg: ${college.placements.averagePackage}`,
+            ]
+              .filter(Boolean)
+              .join(", "),
+      recruiters: Array.isArray(college.recruiters)
+        ? college.recruiters.join(", ")
+        : college.recruiters || "",
+      accreditation: college.accreditation || college.naacGrade || "",
+      rankings: college.rankings || college.nirfRank || "",
       location: college.location || "",
       district: college.district || "",
       state: college.state || "Tamil Nadu",
-      description: college.description || "",
-      website: college.website || "",
-      phone: college.phone || "",
-      email: college.email || "",
+      phone: college.phone || college.contact?.phone || "",
+      email: college.email || college.contact?.email || "",
+      website: college.website || college.contact?.website || "",
       courses: college.courses?.join(", ") || "",
       verified: college.verified || false,
     });
@@ -126,39 +151,64 @@ const AdminColleges = () => {
     }));
   };
 
-  const handleSubmit = async (
-    event: FormEvent
-  ) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-
     setError("");
 
+    // Validate 15 Required/Key Fields
     if (!form.name.trim()) {
-      setError("College name is required.");
+      setError("1. College Name is required.");
       return;
     }
-
+    if (!form.overview.trim()) {
+      setError("2. Overview is required.");
+      return;
+    }
+    if (!form.university.trim()) {
+      setError("3. University is required.");
+      return;
+    }
+    if (!form.collegeType.trim()) {
+      setError("4. College Type is required.");
+      return;
+    }
+    if (!form.eligibility.trim()) {
+      setError("6. Eligibility is required.");
+      return;
+    }
+    if (!form.admission.trim()) {
+      setError("7. Admission details are required.");
+      return;
+    }
+    if (!form.tuitionFees.trim()) {
+      setError("8. Tuition Fees are required.");
+      return;
+    }
     if (!form.location.trim()) {
       setError("Location is required.");
       return;
     }
-
     if (!form.district.trim()) {
       setError("District is required.");
-      return;
-    }
-
-    if (!form.description.trim()) {
-      setError("Description is required.");
       return;
     }
 
     try {
       setSaving(true);
 
-      const courses = form.courses
+      const coursesArr = form.courses
         .split(",")
-        .map((course) => course.trim())
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      const facilitiesArr = form.facilities
+        .split(",")
+        .map((f) => f.trim())
+        .filter(Boolean);
+
+      const recruitersArr = form.recruiters
+        .split(",")
+        .map((r) => r.trim())
         .filter(Boolean);
 
       const slug = form.name
@@ -170,45 +220,59 @@ const AdminColleges = () => {
       const collegeData = {
         name: form.name.trim(),
         slug,
+        overview: form.overview.trim(),
+        description: form.overview.trim(),
+        university: form.university.trim(),
+        collegeType: form.collegeType.trim(),
+        tneaCode: form.tneaCode.trim(),
+        eligibility: form.eligibility.trim(),
+        admission: form.admission.trim(),
+        admissionNotes: form.admission.trim(),
+        tuitionFees: form.tuitionFees.trim(),
+        hostelInfo: form.hostel.trim(),
+        hostel: {
+          available: !!form.hostel.trim(),
+          details: form.hostel.trim(),
+        },
+        facilities: facilitiesArr,
+        placement: form.placement.trim(),
+        recruiters: recruitersArr,
+        accreditation: form.accreditation.trim(),
+        rankings: form.rankings.trim(),
+        contactInfo: [form.phone.trim(), form.email.trim(), form.website.trim()].filter(Boolean).join(" | "),
+        contact: {
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          website: form.website.trim(),
+          address: `${form.location.trim()}, ${form.district.trim()}, ${form.state.trim()}`,
+        },
         location: form.location.trim(),
         district: form.district.trim(),
         state: form.state.trim(),
-        description: form.description.trim(),
-        website: form.website.trim(),
         phone: form.phone.trim(),
         email: form.email.trim(),
-        courses,
-        logo: "",
-        images: [],
+        website: form.website.trim(),
+        courses: coursesArr,
         verified: form.verified,
       };
 
       if (editingId) {
-        await updateCollege(
-          editingId,
-          collegeData
-        );
+        await updateCollege(editingId, collegeData);
       } else {
         await createCollege(collegeData);
       }
 
       await loadColleges();
-
       resetForm();
     } catch (error) {
       console.error(error);
-
-      setError(
-        "Something went wrong while saving the college."
-      );
+      setError("Something went wrong while saving the college.");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDelete = async (
-    college: College
-  ) => {
+  const handleDelete = async (college: College) => {
     const confirmed = window.confirm(
       `Are you sure you want to delete "${college.name}"?`
     );
@@ -217,24 +281,14 @@ const AdminColleges = () => {
 
     try {
       await deleteCollege(college.id);
-
-      setColleges((current) =>
-        current.filter(
-          (item) => item.id !== college.id
-        )
-      );
+      setColleges((current) => current.filter((item) => item.id !== college.id));
     } catch (error) {
       console.error(error);
-
-      setError(
-        "Failed to delete the college."
-      );
+      setError("Failed to delete the college.");
     }
   };
 
-  const toggleVerification = async (
-    college: College
-  ) => {
+  const toggleVerification = async (college: College) => {
     try {
       await updateCollege(college.id, {
         verified: !college.verified,
@@ -243,54 +297,38 @@ const AdminColleges = () => {
       setColleges((current) =>
         current.map((item) =>
           item.id === college.id
-            ? {
-                ...item,
-                verified: !item.verified,
-              }
+            ? { ...item, verified: !item.verified }
             : item
         )
       );
     } catch (error) {
       console.error(error);
-      setError(
-        "Failed to update verification."
-      );
+      setError("Failed to update verification.");
     }
   };
 
-  const filteredColleges = colleges.filter(
-    (college) => {
-      const term = search
-        .trim()
-        .toLowerCase();
+  const filteredColleges = colleges.filter((college) => {
+    const term = search.trim().toLowerCase();
+    if (!term) return true;
 
-      if (!term) return true;
-
-      return (
-        college.name
-          ?.toLowerCase()
-          .includes(term) ||
-        college.location
-          ?.toLowerCase()
-          .includes(term) ||
-        college.district
-          ?.toLowerCase()
-          .includes(term)
-      );
-    }
-  );
+    return (
+      college.name?.toLowerCase().includes(term) ||
+      college.location?.toLowerCase().includes(term) ||
+      college.district?.toLowerCase().includes(term)
+    );
+  });
 
   return (
-    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#075B63]">
+    <div className="min-h-screen bg-[#F5F9FC] font-sans text-[#142e23]">
       <Navbar />
 
       <main>
         {/* Header */}
-        <section className="border-b border-[#E2ECF3] bg-[#E8F4FA]">
+        <section className="border-b border-[#cdddc9] bg-[#dce8da]">
           <div className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
             <Link
               to="/admin"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#5A6E78] hover:text-[#075B63]"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#465f51] hover:text-[#143527]"
             >
               <ArrowLeft className="h-4 w-4" />
               Admin Dashboard
@@ -298,24 +336,24 @@ const AdminColleges = () => {
 
             <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-4 py-1.5 text-xs font-semibold text-[#075B63]">
-                  <Building2 className="h-4 w-4 text-[#075B63]" />
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-4 py-1.5 text-xs font-semibold text-[#143527]">
+                  <Building2 className="h-4 w-4 text-[#143527]" />
                   College Management
                 </div>
 
-                <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-[#075B63]">
+                <h1 className="font-heading text-3xl sm:text-4xl font-extrabold tracking-tight text-[#142e23]">
                   Manage Colleges
                 </h1>
 
-                <p className="mt-2 text-[#5A6E78]">
-                  Add, edit, verify and manage college profiles.
+                <p className="mt-2 text-[#465f51]">
+                  Add, edit, verify and manage complete college profiles with all 15 required fields.
                 </p>
               </div>
 
               <button
                 type="button"
                 onClick={openCreateForm}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-6 py-3 font-semibold text-white transition hover:bg-[#05434A]"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-6 py-3 font-semibold text-white transition hover:bg-[#0b2017]"
               >
                 <Plus className="h-5 w-5" />
                 Add College
@@ -328,177 +366,240 @@ const AdminColleges = () => {
           {/* Form */}
           {showForm && (
             <motion.section
-              initial={{
-                opacity: 0,
-                y: -15,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              className="mb-8 rounded-3xl border border-[#E2ECF3] bg-white p-7 shadow-xs sm:p-9"
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-8 rounded-3xl border border-[#cdddc9] bg-white p-7 shadow-xs sm:p-9"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="font-heading text-2xl font-bold text-[#075B63]">
-                    {editingId
-                      ? "Edit College"
-                      : "Add New College"}
+                  <h2 className="font-heading text-2xl font-bold text-[#142e23]">
+                    {editingId ? "Edit College Details" : "Add New College (15 Required Fields)"}
                   </h2>
 
-                  <p className="mt-1 text-sm text-[#5A6E78]">
-                    Enter the college information below.
+                  <p className="mt-1 text-sm text-[#465f51]">
+                    Enter complete college information for all 15 core parameters below.
                   </p>
                 </div>
 
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="rounded-xl border border-[#E2ECF3] p-2 text-[#5A6E78] hover:text-[#075B63]"
+                  className="rounded-xl border border-[#cdddc9] p-2 text-[#465f51] hover:text-[#143527]"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
               {error && (
-                <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
                   {error}
                 </div>
               )}
 
-              <form
-                onSubmit={handleSubmit}
-                className="mt-8 space-y-6"
-              >
-                <div className="grid gap-5 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+                <h3 className="font-heading text-lg font-bold text-[#143527] border-b border-[#cdddc9] pb-2">
+                  1. Core College Identification
+                </h3>
+                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   <Input
-                    label="College Name *"
+                    label="1. College Name *"
                     value={form.name}
-                    onChange={(value) =>
-                      handleChange("name", value)
-                    }
-                    placeholder="ABC Engineering College"
+                    onChange={(val) => handleChange("name", val)}
+                    placeholder="e.g. PSG College of Technology"
                   />
 
                   <Input
-                    label="Location *"
+                    label="3. University *"
+                    value={form.university}
+                    onChange={(val) => handleChange("university", val)}
+                    placeholder="e.g. Anna University"
+                  />
+
+                  <div>
+                    <label className="text-sm font-semibold text-[#143527]">
+                      4. College Type *
+                    </label>
+                    <select
+                      value={form.collegeType}
+                      onChange={(e) => handleChange("collegeType", e.target.value)}
+                      className="mt-2 h-12 w-full rounded-2xl border border-[#cdddc9] px-4 text-sm text-[#142e23] outline-none focus:border-[#143527] focus:ring-1 focus:ring-[#143527]"
+                    >
+                      <option value="Government">Government</option>
+                      <option value="Government Aided">Government Aided</option>
+                      <option value="Self Financing">Self Financing</option>
+                      <option value="Deemed University">Deemed University</option>
+                      <option value="Autonomous">Autonomous</option>
+                      <option value="Private">Private</option>
+                    </select>
+                  </div>
+
+                  <Input
+                    label="5. TNEA Code"
+                    value={form.tneaCode}
+                    onChange={(val) => handleChange("tneaCode", val)}
+                    placeholder="e.g. 2006"
+                  />
+
+                  <Input
+                    label="Location / City *"
                     value={form.location}
-                    onChange={(value) =>
-                      handleChange(
-                        "location",
-                        value
-                      )
-                    }
-                    placeholder="Chennai"
+                    onChange={(val) => handleChange("location", val)}
+                    placeholder="e.g. Coimbatore"
                   />
 
                   <Input
                     label="District *"
                     value={form.district}
-                    onChange={(value) =>
-                      handleChange(
-                        "district",
-                        value
-                      )
-                    }
-                    placeholder="Chennai"
+                    onChange={(val) => handleChange("district", val)}
+                    placeholder="e.g. Coimbatore"
+                  />
+                </div>
+
+                <h3 className="font-heading text-lg font-bold text-[#143527] border-b border-[#cdddc9] pb-2 pt-4">
+                  2. Academics & Admission Requirements
+                </h3>
+                <div className="space-y-4">
+                  <TextArea
+                    label="2. Overview *"
+                    value={form.overview}
+                    onChange={(val) => handleChange("overview", val)}
+                    placeholder="Comprehensive overview of the college, history, vision, and campus..."
+                    rows={4}
+                  />
+
+                  <TextArea
+                    label="6. Eligibility Criteria *"
+                    value={form.eligibility}
+                    onChange={(val) => handleChange("eligibility", val)}
+                    placeholder="e.g. Minimum 50% aggregate in PCM in 10+2 / HSC..."
+                    rows={3}
+                  />
+
+                  <TextArea
+                    label="7. Admission Process *"
+                    value={form.admission}
+                    onChange={(val) => handleChange("admission", val)}
+                    placeholder="e.g. Admissions conducted via TNEA single window counseling based on Cutoff marks..."
+                    rows={3}
+                  />
+                </div>
+
+                <h3 className="font-heading text-lg font-bold text-[#143527] border-b border-[#cdddc9] pb-2 pt-4">
+                  3. Fees & Infrastructure
+                </h3>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Input
+                    label="8. Tuition Fees *"
+                    value={form.tuitionFees}
+                    onChange={(val) => handleChange("tuitionFees", val)}
+                    placeholder="e.g. ₹55,000 - ₹1,20,000 per year"
                   />
 
                   <Input
-                    label="State *"
-                    value={form.state}
-                    onChange={(value) =>
-                      handleChange("state", value)
-                    }
-                    placeholder="Tamil Nadu"
+                    label="Courses Offered"
+                    value={form.courses}
+                    onChange={(val) => handleChange("courses", val)}
+                    placeholder="e.g. CSE, ECE, EEE, Mechanical, IT (comma separated)"
+                  />
+                </div>
+
+                <div className="space-y-4">
+                  <TextArea
+                    label="9. Hostel Details"
+                    value={form.hostel}
+                    onChange={(val) => handleChange("hostel", val)}
+                    placeholder="Hostel facilities, mess quality, room types, fees..."
+                    rows={3}
+                  />
+
+                  <TextArea
+                    label="10. Facilities"
+                    value={form.facilities}
+                    onChange={(val) => handleChange("facilities", val)}
+                    placeholder="Library, Wi-Fi, Laboratories, Sports Complex, Auditorium (comma separated)"
+                    rows={3}
+                  />
+                </div>
+
+                <h3 className="font-heading text-lg font-bold text-[#143527] border-b border-[#cdddc9] pb-2 pt-4">
+                  4. Placements, Accreditation & Contact
+                </h3>
+                <div className="space-y-4">
+                  <TextArea
+                    label="11. Placement Statistics"
+                    value={form.placement}
+                    onChange={(val) => handleChange("placement", val)}
+                    placeholder="e.g. 95% placement rate. Highest package ₹35 LPA, Average package ₹7.5 LPA..."
+                    rows={3}
+                  />
+
+                  <TextArea
+                    label="12. Top Recruiters"
+                    value={form.recruiters}
+                    onChange={(val) => handleChange("recruiters", val)}
+                    placeholder="Amazon, TCS, Infosys, Zoho, Cognizant (comma separated)"
+                    rows={2}
+                  />
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Input
+                    label="13. Accreditation"
+                    value={form.accreditation}
+                    onChange={(val) => handleChange("accreditation", val)}
+                    placeholder="e.g. NAAC A++ Grade, NBA Accredited"
                   />
 
                   <Input
-                    label="Phone"
+                    label="14. Rankings"
+                    value={form.rankings}
+                    onChange={(val) => handleChange("rankings", val)}
+                    placeholder="e.g. NIRF Rank 63 Engineering"
+                  />
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-3">
+                  <Input
+                    label="15. Contact Phone"
                     value={form.phone}
-                    onChange={(value) =>
-                      handleChange("phone", value)
-                    }
-                    placeholder="+91 9000000000"
+                    onChange={(val) => handleChange("phone", val)}
+                    placeholder="+91 422 2572177"
                   />
 
                   <Input
-                    label="Email"
+                    label="15. Contact Email"
                     type="email"
                     value={form.email}
-                    onChange={(value) =>
-                      handleChange("email", value)
-                    }
-                    placeholder="admissions@college.com"
+                    onChange={(val) => handleChange("email", val)}
+                    placeholder="principal@psgtech.edu"
                   />
 
                   <Input
-                    label="Website"
+                    label="15. Website URL"
                     value={form.website}
-                    onChange={(value) =>
-                      handleChange(
-                        "website",
-                        value
-                      )
-                    }
-                    placeholder="https://college.com"
-                  />
-
-                  <Input
-                    label="Courses"
-                    value={form.courses}
-                    onChange={(value) =>
-                      handleChange(
-                        "courses",
-                        value
-                      )
-                    }
-                    placeholder="CSE, ECE, Mechanical (comma-separated)"
+                    onChange={(val) => handleChange("website", val)}
+                    placeholder="https://www.psgtech.edu"
                   />
                 </div>
 
-                <div>
-                  <label className="text-sm font-semibold text-[#075B63]">
-                    Description *
-                  </label>
-
-                  <textarea
-                    value={form.description}
-                    onChange={(event) =>
-                      handleChange(
-                        "description",
-                        event.target.value
-                      )
-                    }
-                    placeholder="Brief description of the college..."
-                    rows={4}
-                    className="mt-2 w-full rounded-2xl border border-[#E2ECF3] p-4 text-sm text-[#075B63] outline-none focus:border-[#075B63] focus:ring-1 focus:ring-[#075B63]"
-                  />
-                </div>
-
-                <label className="flex items-center gap-3 cursor-pointer">
+                <label className="flex items-center gap-3 cursor-pointer pt-2">
                   <input
                     type="checkbox"
                     checked={form.verified}
-                    onChange={(event) =>
-                      handleChange(
-                        "verified",
-                        event.target.checked
-                      )
-                    }
-                    className="h-5 w-5 rounded-md border-[#E2ECF3] text-[#075B63] focus:ring-[#075B63]"
+                    onChange={(e) => handleChange("verified", e.target.checked)}
+                    className="h-5 w-5 rounded-md border-[#cdddc9] text-[#143527] focus:ring-[#143527]"
                   />
 
-                  <span className="text-sm font-medium text-[#075B63]">
-                    Mark as Verified College
+                  <span className="text-sm font-semibold text-[#142e23]">
+                    Mark as Verified College Listing
                   </span>
                 </label>
 
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                <div className="flex flex-col gap-3 sm:flex-row sm:justify-end pt-4">
                   <button
                     type="button"
                     onClick={resetForm}
-                    className="rounded-full border border-[#E2ECF3] px-6 py-2.5 font-semibold text-[#075B63] hover:bg-[#F0F8FD]"
+                    className="rounded-full border border-[#cdddc9] px-6 py-2.5 font-semibold text-[#143527] hover:bg-[#e6f0e4]"
                   >
                     Cancel
                   </button>
@@ -506,16 +607,14 @@ const AdminColleges = () => {
                   <button
                     type="submit"
                     disabled={saving}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#075B63] px-7 py-2.5 font-semibold text-white transition hover:bg-[#05434A] disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#143527] px-7 py-2.5 font-semibold text-white transition hover:bg-[#0b2017] disabled:opacity-50"
                   >
                     {saving ? (
-                      "Saving..."
+                      "Saving College..."
                     ) : (
                       <>
                         <Check className="h-4 w-4" />
-                        {editingId
-                          ? "Update College"
-                          : "Create College"}
+                        {editingId ? "Update College" : "Create College"}
                       </>
                     )}
                   </button>
@@ -727,18 +826,46 @@ const Input = ({
 }) => {
   return (
     <div>
-      <label className="text-sm font-semibold text-[#075B63]">
+      <label className="text-sm font-semibold text-[#143527]">
         {label}
       </label>
 
       <input
         type={type}
         value={value}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 h-12 w-full rounded-2xl border border-[#E2ECF3] px-4 text-sm text-[#075B63] outline-none focus:border-[#075B63] focus:ring-1 focus:ring-[#075B63]"
+        className="mt-2 h-12 w-full rounded-2xl border border-[#cdddc9] px-4 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:ring-1 focus:ring-[#143527]"
+      />
+    </div>
+  );
+};
+
+const TextArea = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  rows = 3,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  rows?: number;
+}) => {
+  return (
+    <div>
+      <label className="text-sm font-semibold text-[#143527]">
+        {label}
+      </label>
+
+      <textarea
+        rows={rows}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        className="mt-2 w-full rounded-2xl border border-[#cdddc9] p-4 text-sm text-[#142e23] outline-none transition focus:border-[#143527] focus:ring-1 focus:ring-[#143527]"
       />
     </div>
   );

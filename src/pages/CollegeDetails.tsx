@@ -69,47 +69,85 @@ const CollegeDetails = () => {
     }
   };
 
-  const sections: { title: string; body: string }[] = [
-    { title: "Overview", body: college.description || displayValue() },
-    { title: "University", body: displayValue(college.university) },
-    { title: "College type", body: displayValue(college.collegeType) },
-    { title: "TNEA code", body: displayValue(college.tneaCode) },
-    { title: "Eligibility", body: displayValue(college.eligibility) },
-    { title: "Admission", body: displayValue(college.admissionNotes) },
-    { title: "Tuition fees", body: displayValue(college.fees?.tuition || college.feeRange) },
-    { title: "Hostel", body: displayValue(college.hostel?.details || (college.hostelAvailable ? "Available" : undefined)) },
-    { title: "Facilities", body: college.facilities?.join(", ") || displayValue() },
-    {
-      title: "Placement",
-      body: [
-        college.placements?.rate && `Rate: ${college.placements.rate}`,
-        college.placements?.averagePackage && `Average: ${college.placements.averagePackage}`,
-        college.placements?.highestPackage && `Highest: ${college.placements.highestPackage}`,
-      ]
-        .filter(Boolean)
-        .join(" · ") || displayValue(),
-    },
-    { title: "Recruiters", body: college.recruiters?.join(", ") || displayValue() },
-    { title: "Accreditation", body: displayValue(college.accreditation || college.naacGrade) },
-    { title: "Rankings", body: displayValue(college.nirfRank) },
-    { title: "Contact", body: displayValue(college.phone || college.email || college.contact?.phone) },
+  const getSectionBody = (title: string): string | null => {
+    switch (title) {
+      case "Overview":
+        return (college.overview || college.description || "").trim() || null;
+      case "University":
+        return (college.university || "").trim() || null;
+      case "College Type":
+        return (college.collegeType || "").trim() || null;
+      case "TNEA Code":
+        return (college.tneaCode || "").trim() || null;
+      case "Eligibility":
+        return (college.eligibility || "").trim() || null;
+      case "Admission":
+        return (college.admission || college.admissionNotes || "").trim() || null;
+      case "Tuition Fees":
+        return (college.tuitionFees || college.fees?.tuition || college.feeRange || "").trim() || null;
+      case "Hostel":
+        return (college.hostelInfo || college.hostel?.details || (college.hostelAvailable ? "Hostel Facilities Available" : "")).trim() || null;
+      case "Facilities":
+        return Array.isArray(college.facilities) ? college.facilities.join(", ").trim() || null : (college.facilities || "").trim() || null;
+      case "Placement":
+        if (typeof college.placement === "string" && college.placement.trim()) {
+          return college.placement.trim();
+        }
+        const pl = [
+          college.placements?.rate && `Placement Rate: ${college.placements.rate}`,
+          college.placements?.averagePackage && `Average Package: ${college.placements.averagePackage}`,
+          college.placements?.highestPackage && `Highest Package: ${college.placements.highestPackage}`,
+        ].filter(Boolean).join(" · ");
+        return pl.trim() || null;
+      case "Recruiters":
+        return Array.isArray(college.recruiters) ? college.recruiters.join(", ").trim() || null : (college.recruiters || "").trim() || null;
+      case "Accreditation":
+        return (college.accreditation || college.naacGrade || "").trim() || null;
+      case "Rankings":
+        return (college.rankings || college.nirfRank || "").trim() || null;
+      case "Contact":
+        return (college.contactInfo || [college.phone, college.email, college.website].filter(Boolean).join(" · ") || college.contact?.phone || "").trim() || null;
+      default:
+        return null;
+    }
+  };
+
+  const allSectionTitles = [
+    "Overview",
+    "University",
+    "College Type",
+    "TNEA Code",
+    "Eligibility",
+    "Admission",
+    "Tuition Fees",
+    "Hostel",
+    "Facilities",
+    "Placement",
+    "Recruiters",
+    "Accreditation",
+    "Rankings",
+    "Contact",
   ];
+
+  const validSections = allSectionTitles
+    .map((title) => ({ title, body: getSectionBody(title) }))
+    .filter((sec): sec is { title: string; body: string } => Boolean(sec.body));
 
   return (
     <main className="min-h-screen bg-[#F5F9FC] py-10">
       <Seo
         title={college.name}
-        description={college.description?.slice(0, 150) || `Explore ${college.name} in ${college.location}.`}
+        description={(college.overview || college.description)?.slice(0, 150) || `Explore ${college.name} in ${college.location}.`}
         path={`/colleges/${college.id}`}
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Link to="/colleges" className="inline-flex items-center gap-2 text-sm font-bold text-[#075B63] hover:underline">
+        <Link to="/colleges" className="inline-flex items-center gap-2 text-sm font-bold text-[#143527] hover:underline">
           <ArrowLeft className="h-4 w-4" /> Back to colleges
         </Link>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[2fr_1fr]">
           <div>
-            <div className="overflow-hidden rounded-3xl border border-[#E2ECF3] bg-white shadow-md">
+            <div className="overflow-hidden rounded-3xl border border-[#cdddc9] bg-white shadow-md">
               {college.logo || college.images?.[0] ? (
                 <img
                   src={college.images?.[0] || college.logo}
@@ -117,21 +155,28 @@ const CollegeDetails = () => {
                   className="h-56 w-full object-cover"
                 />
               ) : (
-                <div className="flex h-44 items-center justify-center bg-[#E8F4FA] font-heading text-5xl font-black text-[#075B63]/40">
-                  <Building2 className="h-16 w-16 text-[#075B63]" />
+                <div className="flex h-44 items-center justify-center bg-[#dce8da] font-heading text-5xl font-black text-[#143527]/40">
+                  <Building2 className="h-16 w-16 text-[#143527]" />
                 </div>
               )}
               <div className="p-6 sm:p-8">
-                <span className="inline-flex items-center gap-1 rounded-full border border-[#E2ECF3] bg-[#F0F8FD] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#075B63]">
-                  {college.collegeType || "Accredited College"}
-                </span>
-                <h1 className="mt-3 font-heading text-3xl font-extrabold text-[#075B63] sm:text-4xl">{college.name}</h1>
-                <p className="mt-2 flex items-center gap-2 text-sm text-[#5A6E78]">
-                  <MapPin className="h-4 w-4 text-[#075B63]" /> {displayValue(college.location)}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#e6f0e4] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#143527]">
+                    {college.collegeType || "Accredited College"}
+                  </span>
+                  {college.tneaCode && (
+                    <span className="inline-flex items-center gap-1 rounded-full border border-[#cdddc9] bg-[#dce8da] px-3.5 py-1 text-xs font-bold text-[#143527]">
+                      TNEA Code: {college.tneaCode}
+                    </span>
+                  )}
+                </div>
+                <h1 className="mt-3 font-heading text-3xl font-extrabold text-[#142e23] sm:text-4xl">{college.name}</h1>
+                <p className="mt-2 flex items-center gap-2 text-sm text-[#465f51]">
+                  <MapPin className="h-4 w-4 text-[#143527]" /> {displayValue(college.location)}{college.district ? `, ${college.district}` : ""}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {(college.courses ?? []).slice(0, 8).map((course) => (
-                    <span key={course} className="rounded-full border border-[#E2ECF3] bg-[#F0F8FD]/60 px-3 py-1 text-xs font-medium text-[#075B63]">
+                    <span key={course} className="rounded-full border border-[#cdddc9] bg-[#e6f0e4]/60 px-3 py-1 text-xs font-medium text-[#143527]">
                       {course}
                     </span>
                   ))}
@@ -140,10 +185,10 @@ const CollegeDetails = () => {
             </div>
 
             <div className="mt-6 space-y-4">
-              {sections.map((section) => (
-                <section key={section.title} className="rounded-3xl border border-[#E2ECF3] bg-white p-6 shadow-xs">
-                  <h2 className="font-heading text-lg font-bold text-[#075B63]">{section.title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-[#5A6E78]">{section.body}</p>
+              {validSections.map((section) => (
+                <section key={section.title} className="rounded-3xl border border-[#cdddc9] bg-white p-6 shadow-xs">
+                  <h2 className="font-heading text-lg font-bold text-[#143527]">{section.title}</h2>
+                  <p className="mt-2 text-sm leading-relaxed text-[#465f51] whitespace-pre-line">{section.body}</p>
                 </section>
               ))}
               {college.faqs && college.faqs.length > 0 && (

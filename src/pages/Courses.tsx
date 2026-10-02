@@ -25,14 +25,12 @@ const Courses = () => {
     const value = search.toLowerCase().trim();
 
     return courses.filter((course) => {
-      const matchesSearch =
-        !value ||
-        course.name.toLowerCase().includes(value) ||
-        course.categoryName.toLowerCase().includes(value);
+      const nameMatch = (course.name || "").toLowerCase().includes(value);
+      const catMatch = (course.categoryName || "").toLowerCase().includes(value);
+      const descMatch = (course.description || "").toLowerCase().includes(value);
 
-      const matchesCategory =
-        !categoryId ||
-        course.categoryId === categoryId;
+      const matchesSearch = !value || nameMatch || catMatch || descMatch;
+      const matchesCategory = !categoryId || course.categoryId === categoryId;
 
       return matchesSearch && matchesCategory;
     });

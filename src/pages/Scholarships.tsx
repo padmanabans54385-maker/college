@@ -22,10 +22,10 @@ const Scholarships = () => {
     const value = search.toLowerCase().trim();
 
     return scholarships.filter((s) => {
-      const matchesSearch =
-        !value ||
-        (s.name || "").toLowerCase().includes(value) ||
-        s.provider.toLowerCase().includes(value);
+      const nameMatch = (s.name || "").toLowerCase().includes(value);
+      const providerMatch = (s.provider || "").toLowerCase().includes(value);
+      const descMatch = (s.description || "").toLowerCase().includes(value);
+      const matchesSearch = !value || nameMatch || providerMatch || descMatch;
 
       const matchesType = !type || s.type === type;
       return matchesSearch && matchesType;

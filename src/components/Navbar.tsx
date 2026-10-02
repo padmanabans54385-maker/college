@@ -12,7 +12,6 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "../hooks/AuthContext";
-import { useSettings } from "../hooks/SettingsContext";
 import { logoutUser } from "../firebase/auth";
 import { brand } from "../config/brand";
 
@@ -20,7 +19,6 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, profile } = useAuth();
-  const { contact } = useSettings();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false);
   const userRef = useRef<HTMLDivElement>(null);

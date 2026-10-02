@@ -85,18 +85,27 @@ export const getCourses = async (): Promise<Course[]> => {
 };
 
 export const getPublishedCourses = async (): Promise<Course[]> => {
-  const q = query(
-    coursesCollection,
-    where("published", "==", true),
-    orderBy("name")
-  );
+  try {
+    const q = query(
+      coursesCollection,
+      where("published", "==", true)
+    );
 
-  const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
-  })) as Course[];
+    const items = snapshot.docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    })) as Course[];
+
+    return items.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || "")
+    );
+  } catch (error) {
+    console.warn("getPublishedCourses fallback triggered:", error);
+    const all = await getCourses();
+    return all.filter((item) => item.published !== false);
+  }
 };
 
 export const getCourseById = async (
@@ -117,37 +126,53 @@ export const getCourseById = async (
 export const getCoursesByCollege = async (
   collegeId: string
 ): Promise<Course[]> => {
-  const q = query(
-    coursesCollection,
-    where("collegeIds", "array-contains", collegeId),
-    where("published", "==", true),
-    orderBy("name")
-  );
+  try {
+    const q = query(
+      coursesCollection,
+      where("collegeIds", "array-contains", collegeId)
+    );
 
-  const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
-  })) as Course[];
+    const items = snapshot.docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    })) as Course[];
+
+    return items
+      .filter((item) => item.published !== false)
+      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  } catch (error) {
+    console.warn("getCoursesByCollege fallback triggered:", error);
+    const all = await getPublishedCourses();
+    return all.filter((c) => c.collegeIds?.includes(collegeId));
+  }
 };
 
 export const getCoursesByCategory = async (
   categoryId: string
 ): Promise<Course[]> => {
-  const q = query(
-    coursesCollection,
-    where("categoryId", "==", categoryId),
-    where("published", "==", true),
-    orderBy("name")
-  );
+  try {
+    const q = query(
+      coursesCollection,
+      where("categoryId", "==", categoryId)
+    );
 
-  const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
-  })) as Course[];
+    const items = snapshot.docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    })) as Course[];
+
+    return items
+      .filter((item) => item.published !== false)
+      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  } catch (error) {
+    console.warn("getCoursesByCategory fallback triggered:", error);
+    const all = await getPublishedCourses();
+    return all.filter((c) => c.categoryId === categoryId);
+  }
 };
 
 export const createCourse = async (

@@ -39,18 +39,27 @@ export const getScholarships = async (): Promise<
 export const getPublishedScholarships = async (): Promise<
   Scholarship[]
 > => {
-  const q = query(
-    scholarshipsCollection,
-    where("published", "==", true),
-    orderBy("name")
-  );
+  try {
+    const q = query(
+      scholarshipsCollection,
+      where("published", "==", true)
+    );
 
-  const snapshot = await getDocs(q);
+    const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((item) => ({
-    id: item.id,
-    ...item.data(),
-  })) as Scholarship[];
+    const items = snapshot.docs.map((item) => ({
+      id: item.id,
+      ...item.data(),
+    })) as Scholarship[];
+
+    return items.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || "")
+    );
+  } catch (error) {
+    console.warn("getPublishedScholarships fallback triggered:", error);
+    const all = await getScholarships();
+    return all.filter((item) => item.published !== false);
+  }
 };
 
 export const getScholarshipById = async (
